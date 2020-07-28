@@ -8,18 +8,11 @@ import io.netty.channel.socket.SocketChannel;
 
 public class Hades {
 
-    private static boolean registered = false;
-
-    private static void setupPackets() {
-        if (registered) return;
-        registered = true;
-
+    public static void registerPackets() {
         HadesRegistry.registerPacket(PacketAuthenticate.class);
     }
 
     public static void insertHades(SocketChannel channel) {
-        setupPackets();
-
         channel.pipeline().addLast("encoder", new HadesMessageEncoder());
         channel.pipeline().addLast("executor", new HadesInboundAdapter());
     }
