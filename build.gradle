@@ -1,0 +1,42 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath 'com.bmuschko:gradle-nexus-plugin:2.3.1'
+    }
+}
+
+apply plugin: 'java'
+apply plugin: 'com.bmuschko.nexus'
+
+def versionObj = new Version(major: 1, minor: 0, revision: 1)
+
+group 'com.wynntils.hades'
+version "${versionObj}"
+
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
+dependencies {
+    compile 'io.netty:netty-all:4.1.9.Final' // needs to match MC version
+}
+
+nexus {
+    sign = false
+    repositoryUrl = 'https://repo.wynntils.com/repository/maven-releases/'
+}
+
+class Version {
+    static String major, minor, revision
+
+    static String getBuild() {
+        System.getenv("BUILD_NUMBER") ?: System.getProperty("BUILD_NUMBER") ?: "DEV"
+    }
+
+    String toString() {
+        "${major}.${minor}.${revision}_$build"
+    }
+}
