@@ -8,14 +8,14 @@ public class PacketRegistryContainer {
 
     PacketInfo info;
     String classPath;
-    HadesPacketExecutor<HadesPacket> executor;
+    HadesPacketExecutor<? extends HadesPacket> executor;
 
     public PacketRegistryContainer(PacketInfo info, String classPath) {
         this.info = info;
         this.classPath = classPath;
     }
 
-    public void setExecutor(HadesPacketExecutor<HadesPacket> executor) {
+    public void setExecutor(HadesPacketExecutor<? extends HadesPacket> executor) {
         this.executor = executor;
     }
 
@@ -23,7 +23,7 @@ public class PacketRegistryContainer {
         return info;
     }
 
-    public HadesPacketExecutor<HadesPacket> getExecutor() {
+    public HadesPacketExecutor<? extends HadesPacket> getExecutor() {
         return executor;
     }
 

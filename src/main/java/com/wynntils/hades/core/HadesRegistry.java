@@ -79,7 +79,7 @@ public class HadesRegistry {
      * @param executor the provided HadesPacketExecutor
      * @return true if success
      */
-    public static boolean setPacketExecutor(Class<? extends HadesPacket> packetClass, HadesPacketExecutor<HadesPacket> executor) {
+    public static <T extends HadesPacket> boolean setPacketExecutor(Class<? extends HadesPacket> packetClass, HadesPacketExecutor<T> executor) {
         PacketRegistryContainer container = getPacketByClass(packetClass);
         if (container == null) return false;
 
