@@ -63,7 +63,7 @@ public class HadesNetworkManager extends SimpleChannelInboundHandler<HadesPacket
     /**
      * Should be called in order to receive and update the packet queue
      */
-    public void processReceivedPackets() {
+    public void flushPackets() {
         if (channel == null || !channel.isOpen()) return;
 
         channel.flush();

@@ -30,4 +30,10 @@ public interface IHadesServerContainer {
      */
     void sendPacket(HadesPacket<?> packet);
 
+    /**
+     * Updates all available connections to receive their packets.
+     * @see HadesNetworkManager#flushPackets()
+     */
+    void flushPackets();
+
 }
