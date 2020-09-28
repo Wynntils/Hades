@@ -19,13 +19,19 @@ import java.util.List;
  */
 public class HadesPacketDecoder extends ByteToMessageDecoder {
 
+    PacketRegistry registry;
+
+    public HadesPacketDecoder(PacketRegistry registry) {
+        this.registry = registry;
+    }
+
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
         if (in.readableBytes() == 0) return;
 
         HadesBuffer buffer = new HadesBuffer(in);
         int packetId = buffer.readVarInt();
-        HadesPacket<?> packet = PacketRegistry.createPacket(packetId);
+        HadesPacket<?> packet = registry.createPacket(packetId);
 
         if (packet == null) {
             throw new IOException("Invalid packet id " + packetId);

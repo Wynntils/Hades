@@ -16,10 +16,16 @@ import io.netty.handler.codec.MessageToByteEncoder;
  */
 public class HadesPacketEncoder extends MessageToByteEncoder<HadesPacket<?>> {
 
+    PacketRegistry registry;
+
+    public HadesPacketEncoder(PacketRegistry registry) {
+        this.registry = registry;
+    }
+
     @Override
     protected void encode(ChannelHandlerContext ctx, HadesPacket<?> msg, ByteBuf out) {
         HadesBuffer buffer = new HadesBuffer(out);
-        int packetId = PacketRegistry.getPacketId(msg.getClass());
+        int packetId = registry.getPacketId(msg.getClass());
 
         buffer.writeVarInt(packetId);
         msg.writeData(buffer);

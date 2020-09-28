@@ -30,8 +30,8 @@ public enum PacketRegistry {
         }
     };
 
-    private static final HashMap<Integer, Class<? extends HadesPacket>> registeredPackets = new HashMap<>();
-    private static final HashMap<Class<? extends HadesPacket>, Integer> reverseLookup = new HashMap<>();
+    private final HashMap<Integer, Class<? extends HadesPacket>> registeredPackets = new HashMap<>();
+    private final HashMap<Class<? extends HadesPacket>, Integer> reverseLookup = new HashMap<>();
 
     protected void registerPacket(Class<? extends HadesPacket<?>> packetClass) {
         if (registeredPackets.containsValue(packetClass))
@@ -42,11 +42,11 @@ public enum PacketRegistry {
         reverseLookup.put(packetClass, id);
     }
 
-    public static int getPacketId(Class<? extends HadesPacket> packet) {
+    public int getPacketId(Class<? extends HadesPacket> packet) {
         return reverseLookup.get(packet);
     }
 
-    public static HadesPacket<?> createPacket(int packetId) throws IllegalAccessException, InstantiationException {
+    public HadesPacket<?> createPacket(int packetId) throws IllegalAccessException, InstantiationException {
         if (!registeredPackets.containsKey(packetId)) return null;
 
         return registeredPackets.get(packetId).newInstance();

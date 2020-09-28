@@ -154,8 +154,8 @@ public class HadesNetworkBuilder {
         ch.config().setOption(ChannelOption.TCP_NODELAY, true);
 
         ch.pipeline().addLast("timeout", new ReadTimeoutHandler(30));
-        ch.pipeline().addLast("decoder", new HadesPacketDecoder());
-        ch.pipeline().addLast("encoder", new HadesPacketEncoder());
+        ch.pipeline().addLast("decoder", new HadesPacketDecoder(direction.getRegistry()));
+        ch.pipeline().addLast("encoder", new HadesPacketEncoder(direction.getRegistry()));
         ch.pipeline().addLast("handler", manager);
 
         // packet compression

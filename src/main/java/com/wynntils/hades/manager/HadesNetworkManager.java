@@ -70,7 +70,6 @@ public class HadesNetworkManager extends SimpleChannelInboundHandler<HadesPacket
     }
 
     /**
-     *
      * @return if the channel is open
      */
     public boolean isOpen() {
