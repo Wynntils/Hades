@@ -4,8 +4,8 @@ import com.wynntils.hades.protocol.packets.PacketRegistry;
 
 public enum PacketDirection {
 
-    CLIENT (PacketRegistry.CLIENT, PacketRegistry.SERVER),
-    SERVER (PacketRegistry.SERVER, PacketRegistry.CLIENT);
+    CLIENT (PacketRegistry.SERVER, PacketRegistry.CLIENT),
+    SERVER (PacketRegistry.CLIENT, PacketRegistry.SERVER);
 
     PacketRegistry encodeRegistry;
     PacketRegistry decodeRegistry;
