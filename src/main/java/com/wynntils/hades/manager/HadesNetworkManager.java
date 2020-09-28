@@ -104,4 +104,15 @@ public class HadesNetworkManager extends SimpleChannelInboundHandler<HadesPacket
         ((HadesPacket<IHadesConnection>) msg).process(packetListener); // process the packet
     }
 
+    /**
+     * Dispatches every exception
+     *
+     * @param ctx the channel context
+     * @param cause the throwable
+     */
+    @Override
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)  {
+        cause.printStackTrace();
+    }
+
 }
