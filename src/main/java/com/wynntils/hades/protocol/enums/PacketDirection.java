@@ -4,17 +4,23 @@ import com.wynntils.hades.protocol.packets.PacketRegistry;
 
 public enum PacketDirection {
 
-    CLIENT (PacketRegistry.SERVER),
-    SERVER (PacketRegistry.CLIENT);
+    CLIENT (PacketRegistry.CLIENT, PacketRegistry.SERVER),
+    SERVER (PacketRegistry.SERVER, PacketRegistry.CLIENT);
 
-    PacketRegistry registry;
+    PacketRegistry encodeRegistry;
+    PacketRegistry decodeRegistry;
 
-    PacketDirection(PacketRegistry registry) {
-        this.registry = registry;
+    PacketDirection(PacketRegistry encodeRegistry, PacketRegistry decodeRegistry) {
+        this.encodeRegistry = encodeRegistry;
+        this.decodeRegistry = decodeRegistry;
     }
 
-    public PacketRegistry getRegistry() {
-        return registry;
+    public PacketRegistry getEncodeRegistry() {
+        return encodeRegistry;
+    }
+
+    public PacketRegistry getDecodeRegistry() {
+        return decodeRegistry;
     }
 
 }
