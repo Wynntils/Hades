@@ -12,6 +12,8 @@ public class HPacketAuthenticate implements HadesPacket<IHadesServerAdapter> {
 
     String token;
 
+    public HPacketAuthenticate() { }
+
     public HPacketAuthenticate(String token) {
         this.token = token;
     }

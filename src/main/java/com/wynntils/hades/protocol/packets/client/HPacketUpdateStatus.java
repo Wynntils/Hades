@@ -13,6 +13,8 @@ public class HPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
     double x, y, z;
     int life, mana;
 
+    public HPacketUpdateStatus() { }
+
     public HPacketUpdateStatus(double x, double y, double z, int life, int mana) {
         this.x = x;
         this.y = y;

@@ -19,6 +19,8 @@ public class HPacketSocialUpdate implements HadesPacket<IHadesServerAdapter> {
     PacketAction action;
     SocialType type;
 
+    public HPacketSocialUpdate() { }
+
     public HPacketSocialUpdate(List<String> updatedNames, PacketAction action, SocialType type) {
         this.updatedNames = updatedNames;
         this.action = action;

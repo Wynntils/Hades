@@ -15,6 +15,17 @@ public class HPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
     double x, y, z;
     int health, mana;
 
+    public HPacketUpdateMutual() { }
+
+    public HPacketUpdateMutual(UUID user, double x, double y, double z, int health, int mana) {
+        this.user = user;
+        this.x = x;
+        this.y = y;
+        this.z = z;
+        this.health = health;
+        this.mana = mana;
+    }
+
     public UUID getUser() {
         return user;
     }
@@ -37,15 +48,6 @@ public class HPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
 
     public int getMana() {
         return mana;
-    }
-
-    public HPacketUpdateMutual(UUID user, double x, double y, double z, int health, int mana) {
-        this.user = user;
-        this.x = x;
-        this.y = y;
-        this.z = z;
-        this.health = health;
-        this.mana = mana;
     }
 
     @Override
