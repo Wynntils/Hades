@@ -151,9 +151,9 @@ public class HadesNetworkBuilder {
         ch.config().setOption(ChannelOption.TCP_NODELAY, true);
 
         ch.pipeline().addLast("timeout", new ReadTimeoutHandler(30));
-        ch.pipeline().addLast("splitter", new HadesIntSplitter());
+        //ch.pipeline().addLast("splitter", new HadesIntSplitter());
         ch.pipeline().addLast("decoder", new HadesPacketDecoder(direction.getDecodeRegistry()));
-        ch.pipeline().addLast("prepender", new HadesIntPrepender());
+        //ch.pipeline().addLast("prepender", new HadesIntPrepender());
         ch.pipeline().addLast("encoder", new HadesPacketEncoder(direction.getEncodeRegistry()));
         ch.pipeline().addLast("handler", manager);
 

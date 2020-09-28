@@ -148,6 +148,14 @@ public class HadesBuffer extends ByteBuf {
         return result;
     }
 
+    public HadesBuffer writeEnum(Enum<?> value) {
+        return this.writeVarInt(value.ordinal());
+    }
+
+    public <T extends Enum<T>> T readEnum(Class<T> enumClass) {
+        return (T)((Enum[])enumClass.getEnumConstants())[readVarInt()];
+    }
+
     // Default Buffer Implementation
     public int capacity()
     {

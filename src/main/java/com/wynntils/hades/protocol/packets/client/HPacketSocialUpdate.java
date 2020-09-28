@@ -40,15 +40,15 @@ public class HPacketSocialUpdate implements HadesPacket<IHadesServerAdapter> {
     @Override
     public void readData(HadesBuffer buffer) {
         updatedNames = buffer.readStringList();
-        action = PacketAction.valueOf(buffer.readString());
-        type = SocialType.valueOf(buffer.readString());
+        action = buffer.readEnum(PacketAction.class);
+        type = buffer.readEnum(SocialType.class);
     }
 
     @Override
     public void writeData(HadesBuffer buffer) {
         buffer.writeStringList(updatedNames);
-        buffer.writeString(action.name());
-        buffer.writeString(type.name());
+        buffer.writeEnum(action);
+        buffer.writeEnum(action);
     }
 
     @Override
