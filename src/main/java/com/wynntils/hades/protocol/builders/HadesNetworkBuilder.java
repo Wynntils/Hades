@@ -18,9 +18,12 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.EventLoopGroup;
 import io.netty.channel.epoll.Epoll;
 import io.netty.channel.epoll.EpollEventLoopGroup;
+import io.netty.channel.epoll.EpollServerSocketChannel;
 import io.netty.channel.epoll.EpollSocketChannel;
 import io.netty.channel.nio.NioEventLoopGroup;
+import io.netty.channel.socket.ServerSocketChannel;
 import io.netty.channel.socket.SocketChannel;
+import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 
@@ -139,8 +142,12 @@ public class HadesNetworkBuilder {
                 : new NioEventLoopGroup(0, new ThreadFactoryBuilder().setNameFormat("Hades IO #%d").setDaemon(true).build());
     }
 
-    private Class <? extends SocketChannel> getChannel() {
+    private Class <? extends SocketChannel> getClientChannel() {
         return Epoll.isAvailable() ? EpollSocketChannel.class : NioSocketChannel.class;
+    }
+
+    private Class <? extends ServerSocketChannel> getServerChannel() {
+        return Epoll.isAvailable() ? EpollServerSocketChannel.class : NioServerSocketChannel.class;
     }
 
     private void setupChannel(Channel ch, HadesNetworkManager manager) {
@@ -175,7 +182,7 @@ public class HadesNetworkBuilder {
             protected void initChannel(Channel ch) {
                 setupChannel(ch, manager);
             }
-        }).channel(getChannel()).connect(address, serverPort).syncUninterruptibly();
+        }).channel(getClientChannel()).connect(address, serverPort).syncUninterruptibly();
 
         return manager;
     }
@@ -189,7 +196,7 @@ public class HadesNetworkBuilder {
         assert serverContainer != null && address != null && serverPort != 0 && direction == PacketDirection.CLIENT;
 
         // setup the server network
-        new ServerBootstrap().group(getEventLoopGroup()).childHandler(new ChannelInitializer<Channel>() {
+        new ServerBootstrap().group(getEventLoopGroup()).channel(getServerChannel()).childHandler(new ChannelInitializer<Channel>() {
             protected void initChannel(Channel ch) throws Exception {
                 HadesNetworkManager manager = new HadesNetworkManager(PacketDirection.CLIENT, handlerFactory.createHandler());
                 setupChannel(ch, manager);
