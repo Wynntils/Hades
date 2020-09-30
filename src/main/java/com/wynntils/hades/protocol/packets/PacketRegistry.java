@@ -2,8 +2,10 @@ package com.wynntils.hades.protocol.packets;
 
 import com.wynntils.hades.protocol.interfaces.HadesPacket;
 import com.wynntils.hades.protocol.packets.client.HPacketAuthenticate;
+import com.wynntils.hades.protocol.packets.client.HPacketDiscordLobbyClient;
 import com.wynntils.hades.protocol.packets.client.HPacketSocialUpdate;
 import com.wynntils.hades.protocol.packets.client.HPacketUpdateStatus;
+import com.wynntils.hades.protocol.packets.server.HPacketDiscordLobbyServer;
 import com.wynntils.hades.protocol.packets.server.HPacketUpdateMutual;
 
 import java.util.HashMap;
@@ -16,6 +18,7 @@ public enum PacketRegistry {
     SERVER {
         {
             registerPacket(HPacketUpdateMutual.class);
+            registerPacket(HPacketDiscordLobbyServer.class);
         }
     },
 
@@ -27,6 +30,7 @@ public enum PacketRegistry {
             registerPacket(HPacketAuthenticate.class);
             registerPacket(HPacketSocialUpdate.class);
             registerPacket(HPacketUpdateStatus.class);
+            registerPacket(HPacketDiscordLobbyClient.class);
         }
     };
 
