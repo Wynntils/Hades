@@ -5,6 +5,7 @@ import com.wynntils.hades.protocol.packets.client.HPacketAuthenticate;
 import com.wynntils.hades.protocol.packets.client.HPacketDiscordLobbyClient;
 import com.wynntils.hades.protocol.packets.client.HPacketSocialUpdate;
 import com.wynntils.hades.protocol.packets.client.HPacketUpdateStatus;
+import com.wynntils.hades.protocol.packets.server.HPacketClearMutual;
 import com.wynntils.hades.protocol.packets.server.HPacketDiscordLobbyServer;
 import com.wynntils.hades.protocol.packets.server.HPacketUpdateMutual;
 
@@ -19,6 +20,7 @@ public enum PacketRegistry {
         {
             registerPacket(HPacketUpdateMutual.class);
             registerPacket(HPacketDiscordLobbyServer.class);
+            registerPacket(HPacketClearMutual.class);
         }
     },
 

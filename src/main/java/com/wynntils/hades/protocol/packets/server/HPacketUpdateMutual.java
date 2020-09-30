@@ -1,5 +1,6 @@
 package com.wynntils.hades.protocol.packets.server;
 
+import com.wynntils.hades.protocol.enums.PacketAction;
 import com.wynntils.hades.protocol.interfaces.HadesPacket;
 import com.wynntils.hades.protocol.interfaces.adapters.IHadesClientAdapter;
 import com.wynntils.hades.utils.HadesBuffer;

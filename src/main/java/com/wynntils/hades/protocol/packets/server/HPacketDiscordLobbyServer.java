@@ -12,8 +12,7 @@ public class HPacketDiscordLobbyServer implements HadesPacket<IHadesClientAdapte
     long lobbyId = 0L;
     String lobbySecret = null;
 
-    public HPacketDiscordLobbyServer() {
-    }
+    public HPacketDiscordLobbyServer() { }
 
     public HPacketDiscordLobbyServer(long lobbyId, String lobbySecret) {
         this.lobbyId = lobbyId;
