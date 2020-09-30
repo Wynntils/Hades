@@ -2,6 +2,7 @@ package com.wynntils.hades.protocol.interfaces.adapters;
 
 import com.wynntils.hades.protocol.interfaces.IHadesConnection;
 import com.wynntils.hades.protocol.packets.client.HPacketAuthenticate;
+import com.wynntils.hades.protocol.packets.client.HPacketDiscordLobbyClient;
 import com.wynntils.hades.protocol.packets.client.HPacketSocialUpdate;
 import com.wynntils.hades.protocol.packets.client.HPacketUpdateStatus;
 
@@ -28,11 +29,22 @@ public interface IHadesServerAdapter extends IHadesConnection {
     void handleSocialUpdate(HPacketSocialUpdate packet);
 
     /**
-     * Ued to update the player current location and statuses
+     * Used to update the player current location and statuses
+     * 
      * @see HPacketUpdateStatus
      *
      * @param packet the packet itself
      */
     void handleUpdateStatus(HPacketUpdateStatus packet);
+
+    /**
+     * Used to send the information required to join a discord lobby to the player
+     * joining
+     * 
+     * @see HPacketDiscordLobbyClient
+     * 
+     * @param packet the packet itself
+     */
+    void handleDiscordLobbyServer(HPacketDiscordLobbyClient packet);
 
 }

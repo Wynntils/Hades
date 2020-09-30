@@ -1,6 +1,7 @@
 package com.wynntils.hades.protocol.interfaces.adapters;
 
 import com.wynntils.hades.protocol.interfaces.IHadesConnection;
+import com.wynntils.hades.protocol.packets.server.HPacketDiscordLobbyServer;
 import com.wynntils.hades.protocol.packets.server.HPacketUpdateMutual;
 
 /**
@@ -14,5 +15,12 @@ public interface IHadesClientAdapter extends IHadesConnection {
      * @param packet the packet itself
      */
     void handleUpdateMutual(HPacketUpdateMutual packet);
+
+    /**
+     * Handles sending information required to join a discord lobby
+     * 
+     * @param packet the packet itself
+     */
+    void handleDiscordLobbyServer(HPacketDiscordLobbyServer packet);
 
 }
