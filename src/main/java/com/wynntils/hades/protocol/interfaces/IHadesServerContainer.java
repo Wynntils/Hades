@@ -1,6 +1,6 @@
 package com.wynntils.hades.protocol.interfaces;
 
-import com.wynntils.hades.manager.HadesNetworkManager;
+import com.wynntils.hades.objects.HadesConnection;
 
 public interface IHadesServerContainer {
 
@@ -15,7 +15,7 @@ public interface IHadesServerContainer {
      *
      * @param manager represents the network manager created by the factory.
      */
-    void registerClient(HadesNetworkManager manager);
+    void registerClient(HadesConnection manager);
 
     /**
      * Called when the server is closed.
@@ -32,7 +32,7 @@ public interface IHadesServerContainer {
 
     /**
      * Updates all available connections to receive their packets.
-     * @see HadesNetworkManager#flushPackets()
+     * @see HadesConnection#flushPackets()
      */
     void flushPackets();
 

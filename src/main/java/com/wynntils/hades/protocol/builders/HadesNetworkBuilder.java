@@ -1,9 +1,8 @@
 package com.wynntils.hades.protocol.builders;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
-import com.wynntils.hades.manager.HadesNetworkManager;
+import com.wynntils.hades.objects.HadesConnection;
 import com.wynntils.hades.protocol.enums.PacketDirection;
-import com.wynntils.hades.protocol.interfaces.IHadesConnection;
 import com.wynntils.hades.protocol.interfaces.HadesHandlerFactory;
 import com.wynntils.hades.protocol.interfaces.IHadesServerContainer;
 import com.wynntils.hades.protocol.io.*;
@@ -34,7 +33,6 @@ public class HadesNetworkBuilder {
     InetAddress address;
     int serverPort = 0;
     int compressionThreshold = 0;
-    IHadesConnection handler;
 
     // server
     HadesHandlerFactory handlerFactory;
@@ -88,21 +86,6 @@ public class HadesNetworkBuilder {
     }
 
     /**
-     * Represents the client packet handler.
-     * @see com.wynntils.hades.protocol.interfaces.adapters.IHadesClientAdapter
-     *
-     * Used on creating: CLIENT.
-     *
-     * @param handler the handler itself.
-     * @return the builder instance
-     */
-    public HadesNetworkBuilder setHandler(IHadesConnection handler) {
-        this.handler = handler;
-
-        return this;
-    }
-
-    /**
      * Represents the server packet handler factory.
      * @see com.wynntils.hades.protocol.interfaces.adapters.IHadesServerAdapter
      * @see HadesHandlerFactory
@@ -147,8 +130,9 @@ public class HadesNetworkBuilder {
         return Epoll.isAvailable() ? EpollServerSocketChannel.class : NioServerSocketChannel.class;
     }
 
-    private void setupChannel(Channel ch, HadesNetworkManager manager) {
+    private void setupChannel(Channel ch, HadesConnection manager) {
         ch.config().setOption(ChannelOption.TCP_NODELAY, true);
+        ch.config().setOption(ChannelOption.SO_KEEPALIVE, true);
 
         ch.pipeline().addLast("timeout", new ReadTimeoutHandler(30));
         ch.pipeline().addLast("splitter", new HadesIntSplitter());
@@ -166,15 +150,15 @@ public class HadesNetworkBuilder {
 
     /**
      * Bake up and prepares the client connection forwards a Hades Server.
-     * @see HadesNetworkManager
+     * @see HadesConnection
      *
      * @return the client NetworkManager.
      */
-    public HadesNetworkManager buildClient() {
-        assert direction != null && handler != null && direction == PacketDirection.SERVER;
+    public HadesConnection buildClient() {
+        assert direction != null && direction == PacketDirection.SERVER;
 
         if (address instanceof Inet6Address) System.setProperty("java.net.preferIPv4Stack", "false");
-        HadesNetworkManager manager = new HadesNetworkManager(direction, handler);
+        HadesConnection manager = new HadesConnection(direction, handlerFactory);
 
         // starting the client channel
         new Bootstrap().group(getEventLoopGroup()).handler(new ChannelInitializer<Channel>() {
@@ -194,13 +178,13 @@ public class HadesNetworkBuilder {
     public IHadesServerContainer buildServer() {
         assert serverContainer != null && address != null && serverPort != 0 && direction == PacketDirection.CLIENT;
 
-        // setup the server network
+        // Setup the server network
         new ServerBootstrap().group(getEventLoopGroup()).channel(getServerChannel()).childHandler(new ChannelInitializer<Channel>() {
             protected void initChannel(Channel ch) throws Exception {
-                HadesNetworkManager manager = new HadesNetworkManager(PacketDirection.CLIENT, handlerFactory.createHandler());
-                setupChannel(ch, manager);
+            HadesConnection manager = new HadesConnection(PacketDirection.CLIENT, handlerFactory);
+            setupChannel(ch, manager);
 
-                serverContainer.registerClient(manager);
+            serverContainer.registerClient(manager);
             }
         }).localAddress(address, serverPort).bind().syncUninterruptibly();
 

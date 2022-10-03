@@ -1,6 +1,6 @@
 package com.wynntils.hades.protocol.interfaces;
 
-public interface IHadesConnection {
+public interface IHadesAdapter {
 
     /**
      * Called BEFORE the socket channel is closed.

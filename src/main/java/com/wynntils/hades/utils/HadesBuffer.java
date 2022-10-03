@@ -22,9 +22,9 @@ import java.util.UUID;
 
 public class HadesBuffer extends ByteBuf {
 
-    private final ByteBuf buffer;
+    ByteBuf buffer;
 
-    public HadesBuffer(ByteBuf buffer) {
+    public void setBuffer(ByteBuf buffer) {
         this.buffer = buffer;
     }
 

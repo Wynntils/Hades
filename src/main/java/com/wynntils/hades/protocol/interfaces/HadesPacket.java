@@ -2,7 +2,7 @@ package com.wynntils.hades.protocol.interfaces;
 
 import com.wynntils.hades.utils.HadesBuffer;
 
-public interface HadesPacket<T extends IHadesConnection> {
+public interface HadesPacket<T extends IHadesAdapter> {
 
     /**
      * Called before process, used to retrieve the packet bytes into the packet pojo.
@@ -18,7 +18,7 @@ public interface HadesPacket<T extends IHadesConnection> {
 
     /**
      * Call the handler of this packet
-     * @see IHadesConnection
+     * @see IHadesAdapter
      *
      * @param handler the packet handler;
      */
