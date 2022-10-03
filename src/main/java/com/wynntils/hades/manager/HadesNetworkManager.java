@@ -107,7 +107,7 @@ public class HadesNetworkManager extends SimpleChannelInboundHandler<HadesPacket
     protected void channelRead0(ChannelHandlerContext ctx, HadesPacket<IHadesConnection> msg) throws Exception {
         if (channel == null || !channel.isOpen() || packetListener == null) return;
 
-        msg.setChannel(channel);
+        msg.setChannelId(channel.id());
         msg.process(packetListener); // process the packet
     }
 

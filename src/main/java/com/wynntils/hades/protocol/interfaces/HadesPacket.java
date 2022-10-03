@@ -1,15 +1,15 @@
 package com.wynntils.hades.protocol.interfaces;
 
-import io.netty.channel.Channel;
+import io.netty.channel.ChannelId;
 
 public abstract class HadesPacket<T extends IHadesConnection> implements HadesPacketContract<T> {
-        private Channel channel;
+        private ChannelId channel;
 
-        public Channel getChannel() {
+        public ChannelId getChannelId() {
             return channel;
         }
 
-        public void setChannel(Channel channel) {
+        public void setChannelId(ChannelId channel) {
             this.channel = channel;
         }
 }
