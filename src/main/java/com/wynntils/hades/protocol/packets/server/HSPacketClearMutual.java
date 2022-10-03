@@ -9,13 +9,13 @@ import java.util.UUID;
 /**
  * Tells the client to clear all registered information about mutual friends/party members
  */
-public class HPacketClearMutual implements HadesPacket<IHadesClientAdapter> {
+public class HSPacketClearMutual implements HadesPacket<IHadesClientAdapter> {
 
     UUID user;
 
-    public HPacketClearMutual() { }
+    public HSPacketClearMutual() { }
 
-    public HPacketClearMutual(UUID user) {
+    public HSPacketClearMutual(UUID user) {
         this.user = user;
     }
 

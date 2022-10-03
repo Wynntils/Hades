@@ -1,7 +1,7 @@
 package com.wynntils.hades.protocol.interfaces.adapters;
 
 import com.wynntils.hades.protocol.interfaces.IHadesAdapter;
-import com.wynntils.hades.protocol.packets.server.HPacketClearMutual;
+import com.wynntils.hades.protocol.packets.server.HSPacketClearMutual;
 import com.wynntils.hades.protocol.packets.server.HSPacketDiscordLobbyServer;
 import com.wynntils.hades.protocol.packets.server.HSPacketUpdateMutual;
 
@@ -29,6 +29,6 @@ public interface IHadesClientAdapter extends IHadesAdapter {
      *
      * @param packet the packet itself
      */
-    void handleClearMutual(HPacketClearMutual packet);
+    void handleClearMutual(HSPacketClearMutual packet);
 
 }
