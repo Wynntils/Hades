@@ -17,8 +17,6 @@ public interface IHadesConnection {
      * Recommendation: store temporarily inside a Set until the player authenticates, after that move to a map.
      * Reason: Set and maps are faster for interactions along with that the authentication process is easier.
      *
-     * @see HadesHandlerFactory
-     *
      * @param client represents the network manager created by the factory.
      */
     void onConnect(HadesNetworkManager client);

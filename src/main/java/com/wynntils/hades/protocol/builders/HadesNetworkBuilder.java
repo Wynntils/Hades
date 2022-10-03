@@ -4,7 +4,6 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.wynntils.hades.manager.HadesNetworkManager;
 import com.wynntils.hades.protocol.enums.PacketDirection;
 import com.wynntils.hades.protocol.interfaces.IHadesConnection;
-import com.wynntils.hades.protocol.interfaces.HadesHandlerFactory;
 import com.wynntils.hades.protocol.interfaces.IHadesServerContainer;
 import com.wynntils.hades.protocol.io.*;
 import io.netty.bootstrap.Bootstrap;
@@ -23,7 +22,6 @@ import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.handler.timeout.IdleStateHandler;
-import io.netty.handler.timeout.ReadTimeoutHandler;
 
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -36,9 +34,6 @@ public class HadesNetworkBuilder {
     int serverPort = 0;
     int compressionThreshold = 0;
     IHadesConnection handler;
-
-    // server
-    HadesHandlerFactory handlerFactory;
     IHadesServerContainer serverContainer;
 
     /**
@@ -92,29 +87,13 @@ public class HadesNetworkBuilder {
      * Represents the client packet handler.
      * @see com.wynntils.hades.protocol.interfaces.adapters.IHadesClientAdapter
      *
-     * Used on creating: CLIENT.
+     * Used on creating: SERVER; CLIENT.
      *
      * @param handler the handler itself.
      * @return the builder instance
      */
     public HadesNetworkBuilder setHandler(IHadesConnection handler) {
         this.handler = handler;
-
-        return this;
-    }
-
-    /**
-     * Represents the server packet handler factory.
-     * @see com.wynntils.hades.protocol.interfaces.adapters.IHadesServerAdapter
-     * @see HadesHandlerFactory
-     *
-     * Used on creating: SERVER.
-     *
-     * @param handlerFactory the handler factory itself.
-     * @return the builder instance
-     */
-    public HadesNetworkBuilder setHandlerFactory(HadesHandlerFactory handlerFactory) {
-        this.handlerFactory = handlerFactory;
 
         return this;
     }
@@ -204,7 +183,7 @@ public class HadesNetworkBuilder {
         // setup the server network
         new ServerBootstrap().group(getEventLoopGroup()).channel(getServerChannel()).childHandler(new ChannelInitializer<Channel>() {
             protected void initChannel(Channel ch) throws Exception {
-                setupChannel(ch, new HadesNetworkManager(PacketDirection.CLIENT, handlerFactory.createHandler()));
+                setupChannel(ch, new HadesNetworkManager(PacketDirection.CLIENT, handler));
             }
         }).localAddress(address, serverPort).bind().syncUninterruptibly();
 
