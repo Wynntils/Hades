@@ -22,6 +22,7 @@ import io.netty.channel.socket.ServerSocketChannel;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
+import io.netty.handler.timeout.IdleStateHandler;
 import io.netty.handler.timeout.ReadTimeoutHandler;
 
 import java.net.Inet6Address;
@@ -149,8 +150,14 @@ public class HadesNetworkBuilder {
 
     private void setupChannel(Channel ch, HadesNetworkManager manager) {
         ch.config().setOption(ChannelOption.TCP_NODELAY, true);
+        ch.config().setOption(ChannelOption.SO_KEEPALIVE, true);
 
-        ch.pipeline().addLast("timeout", new ReadTimeoutHandler(30));
+        if (this.direction == PacketDirection.CLIENT) {
+            ch.pipeline().addLast("ping", new IdleStateHandler(5, 0, 0));
+        } else {
+            ch.pipeline().addLast("ping", new IdleStateHandler(0, 4, 0));
+        }
+
         ch.pipeline().addLast("splitter", new HadesIntSplitter());
         ch.pipeline().addLast("decoder", new HadesPacketDecoder(direction.getDecodeRegistry()));
         ch.pipeline().addLast("prepender", new HadesIntPrepender());
@@ -197,10 +204,7 @@ public class HadesNetworkBuilder {
         // setup the server network
         new ServerBootstrap().group(getEventLoopGroup()).channel(getServerChannel()).childHandler(new ChannelInitializer<Channel>() {
             protected void initChannel(Channel ch) throws Exception {
-                HadesNetworkManager manager = new HadesNetworkManager(PacketDirection.CLIENT, handlerFactory.createHandler());
-                setupChannel(ch, manager);
-
-                serverContainer.registerClient(manager);
+                setupChannel(ch, new HadesNetworkManager(PacketDirection.CLIENT, handlerFactory.createHandler()));
             }
         }).localAddress(address, serverPort).bind().syncUninterruptibly();
 

@@ -8,7 +8,7 @@ import com.wynntils.hades.utils.HadesBuffer;
  * Handle client status updates.
  * Used for updating the user coordinates, life and mana.
  */
-public class HPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
+public class HPacketUpdateStatus extends HadesPacket<IHadesServerAdapter> {
 
     double x, y, z;
     int life, mana;

@@ -7,7 +7,7 @@ import com.wynntils.hades.utils.HadesBuffer;
 /**
  * Used for sending information to join a discord lobby to the client joining
  */
-public class HPacketDiscordLobbyServer implements HadesPacket<IHadesClientAdapter> {
+public class HPacketDiscordLobbyServer extends HadesPacket<IHadesClientAdapter> {
 
     long lobbyId = 0L;
     String lobbySecret = null;

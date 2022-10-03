@@ -10,7 +10,7 @@ import java.util.UUID;
  * Used for sending information to join a discord lobby to the server to send to
  * the client joining
  */
-public class HPacketDiscordLobbyClient implements HadesPacket<IHadesServerAdapter> {
+public class HPacketDiscordLobbyClient extends HadesPacket<IHadesServerAdapter> {
 
     UUID joiningPlayer = null;
     long lobbyId = 0L;

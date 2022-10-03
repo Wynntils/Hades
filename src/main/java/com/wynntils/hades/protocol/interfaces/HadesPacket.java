@@ -1,27 +1,15 @@
 package com.wynntils.hades.protocol.interfaces;
 
-import com.wynntils.hades.utils.HadesBuffer;
+import io.netty.channel.Channel;
 
-public interface HadesPacket<T extends IHadesConnection> {
+public abstract class HadesPacket<T extends IHadesConnection> implements HadesPacketContract<T> {
+        private Channel channel;
 
-    /**
-     * Called before process, used to retrieve the packet bytes into the packet pojo.
-     * @param buffer the input buffer
-     */
-    void readData(HadesBuffer buffer);
+        public Channel getChannel() {
+            return channel;
+        }
 
-    /**
-     * Called before sending, converts the packet pojo into bytes.
-     * @param buffer the output buffer
-     */
-    void writeData(HadesBuffer buffer);
-
-    /**
-     * Call the handler of this packet
-     * @see IHadesConnection
-     *
-     * @param handler the packet handler;
-     */
-    void process(T handler);
-
+        public void setChannel(Channel channel) {
+            this.channel = channel;
+        }
 }

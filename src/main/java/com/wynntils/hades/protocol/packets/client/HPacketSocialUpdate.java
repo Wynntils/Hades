@@ -12,7 +12,7 @@ import java.util.List;
  * Handles social updates
  * Supported types: FRIEND; PARTY.
  */
-public class HPacketSocialUpdate implements HadesPacket<IHadesServerAdapter> {
+public class HPacketSocialUpdate extends HadesPacket<IHadesServerAdapter> {
 
     List<String> updatedNames;
 

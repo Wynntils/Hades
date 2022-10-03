@@ -1,6 +1,5 @@
 package com.wynntils.hades.protocol.packets.server;
 
-import com.wynntils.hades.protocol.enums.PacketAction;
 import com.wynntils.hades.protocol.interfaces.HadesPacket;
 import com.wynntils.hades.protocol.interfaces.adapters.IHadesClientAdapter;
 import com.wynntils.hades.utils.HadesBuffer;
@@ -10,7 +9,7 @@ import java.util.UUID;
 /**
  * Used for updating mutual friends/party users their status.
  */
-public class HPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
+public class HPacketUpdateMutual extends HadesPacket<IHadesClientAdapter> {
 
     UUID user;
     double x, y, z;

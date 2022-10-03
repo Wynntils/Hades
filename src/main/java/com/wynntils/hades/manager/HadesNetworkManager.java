@@ -1,9 +1,11 @@
 package com.wynntils.hades.manager;
 
 import com.wynntils.hades.protocol.enums.PacketDirection;
-import com.wynntils.hades.protocol.interfaces.IHadesConnection;
 import com.wynntils.hades.protocol.interfaces.HadesPacket;
-import io.netty.channel.*;
+import com.wynntils.hades.protocol.interfaces.IHadesConnection;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 
 /**
  * This represents the connection.
@@ -17,7 +19,7 @@ import io.netty.channel.*;
  * In order to create a NetworkManager use
  * @see com.wynntils.hades.protocol.builders.HadesNetworkBuilder
  */
-public class HadesNetworkManager extends SimpleChannelInboundHandler<HadesPacket<?>> {
+public class HadesNetworkManager extends SimpleChannelInboundHandler<HadesPacket<IHadesConnection>> {
 
     PacketDirection direction;
     Channel channel;
@@ -39,9 +41,7 @@ public class HadesNetworkManager extends SimpleChannelInboundHandler<HadesPacket
 
         // assures the packet send is inside the event loop thread
         if (!channel.eventLoop().inEventLoop()) {
-            channel.eventLoop().execute(() -> {
-                channel.writeAndFlush(packet);
-            });
+            channel.eventLoop().execute(() -> channel.writeAndFlush(packet));
             return;
         }
 
@@ -86,6 +86,12 @@ public class HadesNetworkManager extends SimpleChannelInboundHandler<HadesPacket
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         super.channelActive(ctx);
         this.channel = ctx.channel();
+        packetListener.onConnect(this);
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        super.channelInactive(ctx);
     }
 
     /**
@@ -98,10 +104,11 @@ public class HadesNetworkManager extends SimpleChannelInboundHandler<HadesPacket
      * @throws Exception if failed
      */
     @Override
-    protected void channelRead0(ChannelHandlerContext ctx, HadesPacket<?> msg) throws Exception {
+    protected void channelRead0(ChannelHandlerContext ctx, HadesPacket<IHadesConnection> msg) throws Exception {
         if (channel == null || !channel.isOpen() || packetListener == null) return;
 
-        ((HadesPacket<IHadesConnection>) msg).process(packetListener); // process the packet
+        msg.setChannel(channel);
+        msg.process(packetListener); // process the packet
     }
 
     /**
@@ -115,4 +122,7 @@ public class HadesNetworkManager extends SimpleChannelInboundHandler<HadesPacket
         cause.printStackTrace();
     }
 
+    public Channel getChannel() {
+        return channel;
+    }
 }
