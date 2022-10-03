@@ -20,7 +20,6 @@ import io.netty.channel.socket.ServerSocketChannel;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioServerSocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import io.netty.handler.timeout.ReadTimeoutHandler;
 
 import java.net.Inet6Address;
 import java.net.InetAddress;
@@ -117,7 +116,6 @@ public class HadesNetworkBuilder {
         ch.config().setOption(ChannelOption.TCP_NODELAY, true);
         ch.config().setOption(ChannelOption.SO_KEEPALIVE, true);
 
-        ch.pipeline().addLast("timeout", new ReadTimeoutHandler(30));
         ch.pipeline().addLast("splitter", new HadesIntSplitter());
         ch.pipeline().addLast("decoder", new HadesPacketDecoder(direction.getDecodeRegistry()));
         ch.pipeline().addLast("prepender", new HadesIntPrepender());

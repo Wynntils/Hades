@@ -27,7 +27,7 @@ public class HadesIntSplitter extends ByteToMessageDecoder {
             byteBuffer[i] = in.readByte();
             if (byteBuffer[i] < 0) continue;
 
-            buffer.setBuffer(in);
+            buffer.setBuffer(Unpooled.wrappedBuffer(byteBuffer));
             try {
                 int j = buffer.readVarInt();
 

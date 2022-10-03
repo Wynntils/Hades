@@ -2,9 +2,11 @@ package com.wynntils.hades.objects;
 
 import com.wynntils.hades.protocol.enums.PacketDirection;
 import com.wynntils.hades.protocol.interfaces.HadesHandlerFactory;
-import com.wynntils.hades.protocol.interfaces.IHadesAdapter;
 import com.wynntils.hades.protocol.interfaces.HadesPacket;
-import io.netty.channel.*;
+import com.wynntils.hades.protocol.interfaces.IHadesAdapter;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.channel.SimpleChannelInboundHandler;
 
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
@@ -110,6 +112,7 @@ public class HadesConnection extends SimpleChannelInboundHandler<HadesPacket<?>>
     public void channelActive(ChannelHandlerContext ctx) throws Exception {
         this.channel = ctx.channel();
         this.autoFlusher = channel.eventLoop().scheduleAtFixedRate(() -> channel.flush(), 25, 25, TimeUnit.MILLISECONDS);
+        packetListener.onConnect();
     }
 
     /**
