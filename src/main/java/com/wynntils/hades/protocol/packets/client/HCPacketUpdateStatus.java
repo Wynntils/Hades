@@ -11,15 +11,15 @@ import com.wynntils.hades.utils.HadesBuffer;
 public class HCPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
 
     double x, y, z;
-    int life, mana;
+    double health, mana;
 
     public HCPacketUpdateStatus() { }
 
-    public HCPacketUpdateStatus(double x, double y, double z, int life, int mana) {
+    public HCPacketUpdateStatus(double x, double y, double z, double health, double mana) {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.life = life;
+        this.health = health;
         this.mana = mana;
     }
 
@@ -35,11 +35,11 @@ public class HCPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
         return z;
     }
 
-    public int getLife() {
-        return life;
+    public double getHealth() {
+        return health;
     }
 
-    public int getMana() {
+    public double getMana() {
         return mana;
     }
 
@@ -48,8 +48,8 @@ public class HCPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
         x = buffer.readDouble();
         y = buffer.readDouble();
         z = buffer.readDouble();
-        life = buffer.readVarInt();
-        mana = buffer.readVarInt();
+        health = buffer.readDouble();
+        mana = buffer.readDouble();
     }
 
     @Override
@@ -57,8 +57,8 @@ public class HCPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
         buffer.writeDouble(x);
         buffer.writeDouble(y);
         buffer.writeDouble(z);
-        buffer.writeVarInt(life);
-        buffer.writeVarInt(mana);
+        buffer.writeDouble(health);
+        buffer.writeDouble(mana);
     }
 
     @Override
