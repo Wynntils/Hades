@@ -15,9 +15,6 @@ import java.util.concurrent.TimeUnit;
  * If direction is SERVER it represents the client connection to the server
  * If direction is CLIENT it represents the server channel of the client
  *
- * The server has multiple network managers, one for each connected client
- * @see com.wynntils.hades.protocol.interfaces.IHadesServerContainer
- *
  * In order to create a NetworkManager use
  * @see com.wynntils.hades.protocol.builders.HadesNetworkBuilder
  */

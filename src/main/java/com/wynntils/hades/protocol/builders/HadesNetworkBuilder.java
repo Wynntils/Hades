@@ -4,7 +4,6 @@ import com.google.common.util.concurrent.ThreadFactoryBuilder;
 import com.wynntils.hades.objects.HadesConnection;
 import com.wynntils.hades.protocol.enums.PacketDirection;
 import com.wynntils.hades.protocol.interfaces.HadesHandlerFactory;
-import com.wynntils.hades.protocol.interfaces.IHadesServerContainer;
 import com.wynntils.hades.protocol.io.*;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.bootstrap.ServerBootstrap;
@@ -36,7 +35,6 @@ public class HadesNetworkBuilder {
 
     // server
     HadesHandlerFactory handlerFactory;
-    IHadesServerContainer serverContainer;
 
     /**
      * Remember: this is the packet DIRECTION not the packet origin
@@ -101,21 +99,6 @@ public class HadesNetworkBuilder {
         return this;
     }
 
-    /**
-     * Determines the server container that will be used for registering available connections
-     * @see IHadesServerContainer
-     *
-     * Used on creating: SERVER.
-     *
-     * @param serverContainer the container itself
-     * @return the builder instance
-     */
-    public HadesNetworkBuilder setServerContainer(IHadesServerContainer serverContainer) {
-        this.serverContainer = serverContainer;
-
-        return this;
-    }
-
     private EventLoopGroup getEventLoopGroup() {
         return Epoll.isAvailable()
                 ? new EpollEventLoopGroup(0, new ThreadFactoryBuilder().setNameFormat("Hades Epoll IO #%d").setDaemon(true).build())
@@ -175,20 +158,16 @@ public class HadesNetworkBuilder {
      *
      * @return the server container
      */
-    public IHadesServerContainer buildServer() {
-        assert serverContainer != null && address != null && serverPort != 0 && direction == PacketDirection.CLIENT;
+    public void buildServer() {
+        assert address != null && serverPort != 0 && direction == PacketDirection.CLIENT;
 
-        // Setup the server network
-        new ServerBootstrap().group(getEventLoopGroup()).channel(getServerChannel()).childHandler(new ChannelInitializer<Channel>() {
-            protected void initChannel(Channel ch) throws Exception {
-            HadesConnection manager = new HadesConnection(PacketDirection.CLIENT, handlerFactory);
-            setupChannel(ch, manager);
-
-            serverContainer.registerClient(manager);
+        // Set up the server network
+        new ServerBootstrap().group(getEventLoopGroup()).channel(getServerChannel()).childHandler(new ChannelInitializer<>() {
+            protected void initChannel(Channel ch) {
+                HadesConnection manager = new HadesConnection(PacketDirection.CLIENT, handlerFactory);
+                setupChannel(ch, manager);
             }
         }).localAddress(address, serverPort).bind().syncUninterruptibly();
-
-        return serverContainer;
     }
 
 }
