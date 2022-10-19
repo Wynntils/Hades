@@ -57,5 +57,5 @@ public interface IHadesServerAdapter extends IHadesAdapter {
      *
      * @param packet the packet itself
      */
-    default void handleGuildUpdate(HCPacketGuildUpdate packet) {};
+    default void handleUpdateGuild(HCPacketUpdateGuild packet) {};
 }

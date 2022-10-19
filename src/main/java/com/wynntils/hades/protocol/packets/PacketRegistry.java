@@ -28,7 +28,7 @@ public enum PacketRegistry {
         {
             registerPacket(HCPacketAuthenticate.class);
             registerPacket(HCPacketSocialUpdate.class);
-            registerPacket(HCPacketGuildUpdate.class);
+            registerPacket(HCPacketUpdateGuild.class);
             registerPacket(HCPacketUpdateStatus.class);
             registerPacket(HCPacketDiscordLobbyClient.class);
             registerPacket(HCPacketUpdateWorld.class);

@@ -7,14 +7,14 @@ import com.wynntils.hades.utils.HadesBuffer;
 /**
  * Handles updates to the user's guild
  */
-public class HCPacketGuildUpdate implements HadesPacket<IHadesServerAdapter> {
+public class HCPacketUpdateGuild implements HadesPacket<IHadesServerAdapter> {
 
     String guild;
 
-    public HCPacketGuildUpdate() { }
+    public HCPacketUpdateGuild() { }
 
-    public HCPacketGuildUpdate(String world) {
-        this.guild = world;
+    public HCPacketUpdateGuild(String guild) {
+        this.guild = guild;
     }
 
     public String getGuild() {
@@ -34,7 +34,7 @@ public class HCPacketGuildUpdate implements HadesPacket<IHadesServerAdapter> {
 
     @Override
     public void process(IHadesServerAdapter handler) {
-        handler.handleGuildUpdate(this);
+        handler.handleUpdateGuild(this);
     }
 
 }
