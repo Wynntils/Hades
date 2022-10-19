@@ -15,32 +15,32 @@ public interface IHadesServerAdapter extends IHadesAdapter {
      *
      * @param packet the packet itself
      */
-    void handleAuthentication(HCPacketAuthenticate packet);
+    default void handleAuthentication(HCPacketAuthenticate packet) {};
 
     /**
-     * Used to update the player social conditions.
+     * Used to update the player's social conditions.
      * @see HCPacketSocialUpdate
      *
      * @param packet the packet itself
      */
-    void handleSocialUpdate(HCPacketSocialUpdate packet);
+    default void handleSocialUpdate(HCPacketSocialUpdate packet) {};
 
     /**
-     * Used to update the player current location and statuses
+     * Used to update the player's current location and statuses
      * 
      * @see HCPacketUpdateStatus
      *
      * @param packet the packet itself
      */
-    void handleUpdateStatus(HCPacketUpdateStatus packet);
+    default void handleUpdateStatus(HCPacketUpdateStatus packet) {};
 
     /**
-     * Used to update the player current world and class
+     * Used to update the player's current world and class
      * @see HCPacketUpdateWorld
      *
      * @param packet the packet itself
      */
-    void handleUpdateWorld(HCPacketUpdateWorld packet);
+    default void handleUpdateWorld(HCPacketUpdateWorld packet) {};
 
     /**
      * Used to send the information required to join a discord lobby to the player
@@ -50,6 +50,12 @@ public interface IHadesServerAdapter extends IHadesAdapter {
      * 
      * @param packet the packet itself
      */
-    void handleDiscordLobbyServer(HCPacketDiscordLobbyClient packet);
+    default void handleDiscordLobbyServer(HCPacketDiscordLobbyClient packet) {};
 
+    /**
+     * Used to update the player's current guild
+     *
+     * @param packet the packet itself
+     */
+    default void handleGuildUpdate(HCPacketGuildUpdate packet) {};
 }

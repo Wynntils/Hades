@@ -8,6 +8,7 @@ import io.netty.channel.Channel;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.SimpleChannelInboundHandler;
 
+import java.net.InetSocketAddress;
 import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 
@@ -71,15 +72,12 @@ public class HadesConnection extends SimpleChannelInboundHandler<HadesPacket<?>>
 
     /**
      * Closes the provided channel
-     *
-     * @param reason the reason why the channel was closed
      */
-    public void disconnect(String reason) {
-        if (packetListener == null || channel == null || !channel.isOpen()) {
+    public void disconnect() {
+        if (channel == null || !channel.isOpen()) {
             return;
         }
 
-        packetListener.onDisconnect(reason);
         channel.close().awaitUninterruptibly();
     }
 
@@ -102,6 +100,14 @@ public class HadesConnection extends SimpleChannelInboundHandler<HadesPacket<?>>
     }
 
     /**
+     * @return channel ip address
+     */
+    public String getIp() {
+        InetSocketAddress address = (InetSocketAddress) channel.remoteAddress();
+        return address.getAddress().getHostAddress();
+    }
+
+    /**
      * Receives the channel when it's ready to be used
      * Updates this connection channel and starts the auto flushe
      *
@@ -113,6 +119,12 @@ public class HadesConnection extends SimpleChannelInboundHandler<HadesPacket<?>>
         this.channel = ctx.channel();
         this.autoFlusher = channel.eventLoop().scheduleAtFixedRate(() -> channel.flush(), 25, 25, TimeUnit.MILLISECONDS);
         packetListener.onConnect();
+    }
+
+    @Override
+    public void channelInactive(ChannelHandlerContext ctx) throws Exception {
+        if (autoFlusher != null) autoFlusher.cancel(true);
+        packetListener.onDisconnect();
     }
 
     /**

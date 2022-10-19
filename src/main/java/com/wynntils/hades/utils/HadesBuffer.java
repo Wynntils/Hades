@@ -95,7 +95,9 @@ public class HadesBuffer extends ByteBuf {
     }
 
     public UUID readUUID() {
-        return new UUID(this.readLong(), this.readLong());
+        long most = this.readLong();
+        long least = this.readLong();
+        return new UUID(most, least);
     }
 
     public String readString() {
@@ -141,7 +143,8 @@ public class HadesBuffer extends ByteBuf {
     public List<String> readStringList() {
         List<String> result = new ArrayList<>();
 
-        for (int i = 0; i < readVarInt(); i++) {
+        int size = readVarInt();
+        for (int i = 0; i < size; i++) {
             result.add(readString());
         }
 

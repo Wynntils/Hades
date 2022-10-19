@@ -4,38 +4,36 @@ import com.wynntils.hades.protocol.interfaces.HadesPacket;
 import com.wynntils.hades.protocol.interfaces.adapters.IHadesClientAdapter;
 import com.wynntils.hades.utils.HadesBuffer;
 
-import java.util.UUID;
-
 /**
- * Tells the client to clear all registered information about mutual friends/party members
+ * Tells the client that the server is disconnecting the user.
  */
-public class HSPacketClearMutual implements HadesPacket<IHadesClientAdapter> {
+public class HSPacketDisconnect implements HadesPacket<IHadesClientAdapter> {
 
-    UUID user;
+    String reason;
 
-    public HSPacketClearMutual() { }
+    public HSPacketDisconnect() { }
 
-    public HSPacketClearMutual(UUID user) {
-        this.user = user;
+    public HSPacketDisconnect(String reason) {
+        this.reason = reason;
     }
 
-    public UUID getUser() {
-        return user;
+    public String getReason() {
+        return reason;
     }
 
     @Override
     public void readData(HadesBuffer buffer) {
-        user = buffer.readUUID();
+        reason = buffer.readString();
     }
 
     @Override
     public void writeData(HadesBuffer buffer) {
-        buffer.writeUUID(user);
+        buffer.writeString(reason);
     }
 
     @Override
     public void process(IHadesClientAdapter handler) {
-        handler.handleClearMutual(this);
+        handler.handleDisconnect(this);
     }
 
 }

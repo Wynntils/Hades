@@ -2,9 +2,7 @@ package com.wynntils.hades.protocol.packets;
 
 import com.wynntils.hades.protocol.interfaces.HadesPacket;
 import com.wynntils.hades.protocol.packets.client.*;
-import com.wynntils.hades.protocol.packets.server.HSPacketClearMutual;
-import com.wynntils.hades.protocol.packets.server.HSPacketDiscordLobbyServer;
-import com.wynntils.hades.protocol.packets.server.HSPacketUpdateMutual;
+import com.wynntils.hades.protocol.packets.server.*;
 
 import java.util.HashMap;
 
@@ -15,6 +13,8 @@ public enum PacketRegistry {
      */
     SERVER {
         {
+            registerPacket(HSPacketAuthenticationResponse.class);
+            registerPacket(HSPacketDisconnect.class);
             registerPacket(HSPacketUpdateMutual.class);
             registerPacket(HSPacketDiscordLobbyServer.class);
             registerPacket(HSPacketClearMutual.class);
@@ -28,6 +28,7 @@ public enum PacketRegistry {
         {
             registerPacket(HCPacketAuthenticate.class);
             registerPacket(HCPacketSocialUpdate.class);
+            registerPacket(HCPacketGuildUpdate.class);
             registerPacket(HCPacketUpdateStatus.class);
             registerPacket(HCPacketDiscordLobbyClient.class);
             registerPacket(HCPacketUpdateWorld.class);

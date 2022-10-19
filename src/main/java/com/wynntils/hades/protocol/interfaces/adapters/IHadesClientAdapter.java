@@ -1,9 +1,7 @@
 package com.wynntils.hades.protocol.interfaces.adapters;
 
 import com.wynntils.hades.protocol.interfaces.IHadesAdapter;
-import com.wynntils.hades.protocol.packets.server.HSPacketClearMutual;
-import com.wynntils.hades.protocol.packets.server.HSPacketDiscordLobbyServer;
-import com.wynntils.hades.protocol.packets.server.HSPacketUpdateMutual;
+import com.wynntils.hades.protocol.packets.server.*;
 
 /**
  * Handles all packets sent by the server
@@ -19,7 +17,7 @@ public interface IHadesClientAdapter extends IHadesAdapter {
 
     /**
      * Handles sending information required to join a discord lobby
-     * 
+     *
      * @param packet the packet itself
      */
     void handleDiscordLobbyServer(HSPacketDiscordLobbyServer packet);
@@ -31,4 +29,17 @@ public interface IHadesClientAdapter extends IHadesAdapter {
      */
     void handleClearMutual(HSPacketClearMutual packet);
 
+    /**
+     * Handles the server disconnection
+     *
+     * @param packet the packet itself
+     */
+    void handleDisconnect(HSPacketDisconnect packet);
+
+    /**
+     * Handles the server authentication response
+     *
+     * @param packet the packet itself
+     */
+    void handleAuthenticationResponse(HSPacketAuthenticationResponse packet);
 }

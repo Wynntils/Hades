@@ -5,12 +5,10 @@ public interface IHadesAdapter {
     /**
      * Called when the connection is connected
      */
-    void onConnect();
+    default void onConnect() {};
 
     /**
-     * Called BEFORE the socket channel is closed.
-     *
-     * @param reason the reason for the upcoming disconnection.
+     * Called when the connection is disconnected
      */
-    void onDisconnect(String reason);
+    default void onDisconnect() {};
 }

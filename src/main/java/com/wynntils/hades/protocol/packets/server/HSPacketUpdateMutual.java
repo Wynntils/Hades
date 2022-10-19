@@ -56,8 +56,8 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         x = buffer.readDouble();
         y = buffer.readDouble();
         z = buffer.readDouble();
-        health = buffer.readVarInt();
-        mana = buffer.readVarInt();
+        health = buffer.readDouble();
+        mana = buffer.readDouble();
     }
 
     @Override
