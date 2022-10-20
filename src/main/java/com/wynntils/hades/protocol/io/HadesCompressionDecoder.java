@@ -20,6 +20,7 @@ import java.util.zip.Inflater;
  */
 public class HadesCompressionDecoder extends ByteToMessageDecoder {
 
+    private final HadesBuffer buffer = new HadesBuffer();
     private final Inflater inflater = new Inflater();
     private final int threshold;
 
@@ -31,7 +32,7 @@ public class HadesCompressionDecoder extends ByteToMessageDecoder {
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) throws Exception {
         if (in.readableBytes() == 0) return;
 
-        HadesBuffer buffer = new HadesBuffer(in);
+        buffer.setBuffer(in);
         int compressionLength = buffer.readVarInt();
 
         if (compressionLength == 0) {

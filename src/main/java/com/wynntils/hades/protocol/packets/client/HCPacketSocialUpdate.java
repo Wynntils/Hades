@@ -12,19 +12,19 @@ import java.util.List;
  * Handles social updates
  * Supported types: FRIEND; PARTY.
  */
-public class HPacketSocialUpdate implements HadesPacket<IHadesServerAdapter> {
+public class HCPacketSocialUpdate implements HadesPacket<IHadesServerAdapter> {
 
     List<String> updatedNames;
 
     PacketAction action;
-    SocialType type;
+    SocialType socialType;
 
-    public HPacketSocialUpdate() { }
+    public HCPacketSocialUpdate() { }
 
-    public HPacketSocialUpdate(List<String> updatedNames, PacketAction action, SocialType type) {
+    public HCPacketSocialUpdate(List<String> updatedNames, PacketAction action, SocialType socialType) {
         this.updatedNames = updatedNames;
         this.action = action;
-        this.type = type;
+        this.socialType = socialType;
     }
 
     public List<String> getUpdatedNames() {
@@ -35,22 +35,22 @@ public class HPacketSocialUpdate implements HadesPacket<IHadesServerAdapter> {
         return action;
     }
 
-    public SocialType getType() {
-        return type;
+    public SocialType getSocialType() {
+        return socialType;
     }
 
     @Override
     public void readData(HadesBuffer buffer) {
         updatedNames = buffer.readStringList();
         action = buffer.readEnum(PacketAction.class);
-        type = buffer.readEnum(SocialType.class);
+        socialType = buffer.readEnum(SocialType.class);
     }
 
     @Override
     public void writeData(HadesBuffer buffer) {
         buffer.writeStringList(updatedNames);
         buffer.writeEnum(action);
-        buffer.writeEnum(action);
+        buffer.writeEnum(socialType);
     }
 
     @Override

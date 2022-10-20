@@ -1,55 +1,61 @@
 package com.wynntils.hades.protocol.interfaces.adapters;
 
-import com.wynntils.hades.protocol.interfaces.IHadesConnection;
+import com.wynntils.hades.protocol.interfaces.IHadesAdapter;
 import com.wynntils.hades.protocol.packets.client.*;
 
 /**
  * Handles all packets sent by the client
  */
-public interface IHadesServerAdapter extends IHadesConnection {
+public interface IHadesServerAdapter extends IHadesAdapter {
 
     /**
      * Used to authenticate the user via Athena.
      * Disconnects the user if the token is invalid.
-     * @see HPacketAuthenticate
+     * @see HCPacketAuthenticate
      *
      * @param packet the packet itself
      */
-    void handleAuthentication(HPacketAuthenticate packet);
+    void handleAuthentication(HCPacketAuthenticate packet);
 
     /**
-     * Used to update the player social conditions.
-     * @see HPacketSocialUpdate
+     * Used to update the player's social conditions.
+     * @see HCPacketSocialUpdate
      *
      * @param packet the packet itself
      */
-    void handleSocialUpdate(HPacketSocialUpdate packet);
+    void handleSocialUpdate(HCPacketSocialUpdate packet);
 
     /**
-     * Used to update the player current location and statuses
+     * Used to update the player's current location and statuses
      * 
-     * @see HPacketUpdateStatus
+     * @see HCPacketUpdateStatus
      *
      * @param packet the packet itself
      */
-    void handleUpdateStatus(HPacketUpdateStatus packet);
+    void handleUpdateStatus(HCPacketUpdateStatus packet);
 
     /**
-     * Used to update the player current world and class
-     * @see HPacketUpdateWorld
+     * Used to update the player's current world and class
+     * @see HCPacketUpdateWorld
      *
      * @param packet the packet itself
      */
-    void handleUpdateWorld(HPacketUpdateWorld packet);
+    void handleUpdateWorld(HCPacketUpdateWorld packet);
 
     /**
      * Used to send the information required to join a discord lobby to the player
      * joining
      * 
-     * @see HPacketDiscordLobbyClient
+     * @see HCPacketDiscordLobbyClient
      * 
      * @param packet the packet itself
      */
-    void handleDiscordLobbyServer(HPacketDiscordLobbyClient packet);
+    void handleDiscordLobbyServer(HCPacketDiscordLobbyClient packet);
 
+    /**
+     * Used to update the player's current guild
+     *
+     * @param packet the packet itself
+     */
+    void handleUpdateGuild(HCPacketUpdateGuild packet);
 }

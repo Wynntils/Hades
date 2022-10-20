@@ -11,6 +11,8 @@ import java.util.List;
 
 public class HadesIntSplitter extends ByteToMessageDecoder {
 
+    private final HadesBuffer buffer = new HadesBuffer();
+
     @Override
     protected void decode(ChannelHandlerContext ctx, ByteBuf in, List<Object> out) {
         in.markReaderIndex();
@@ -25,8 +27,7 @@ public class HadesIntSplitter extends ByteToMessageDecoder {
             byteBuffer[i] = in.readByte();
             if (byteBuffer[i] < 0) continue;
 
-            HadesBuffer buffer = new HadesBuffer(Unpooled.wrappedBuffer(byteBuffer));
-
+            buffer.setBuffer(Unpooled.wrappedBuffer(byteBuffer));
             try {
                 int j = buffer.readVarInt();
 

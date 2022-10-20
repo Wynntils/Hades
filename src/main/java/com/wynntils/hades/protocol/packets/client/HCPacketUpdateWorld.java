@@ -7,14 +7,14 @@ import com.wynntils.hades.utils.HadesBuffer;
 /**
  * Handles updates to the user world and class
  */
-public class HPacketUpdateWorld implements HadesPacket<IHadesServerAdapter> {
+public class HCPacketUpdateWorld implements HadesPacket<IHadesServerAdapter> {
 
     String world;
     int classId;
 
-    public HPacketUpdateWorld() { }
+    public HCPacketUpdateWorld() { }
 
-    public HPacketUpdateWorld(String world, int classId) {
+    public HCPacketUpdateWorld(String world, int classId) {
         this.world = world;
         this.classId = classId;
     }

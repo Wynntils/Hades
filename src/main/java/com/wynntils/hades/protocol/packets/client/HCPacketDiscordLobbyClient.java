@@ -1,20 +1,25 @@
-package com.wynntils.hades.protocol.packets.server;
+package com.wynntils.hades.protocol.packets.client;
 
 import com.wynntils.hades.protocol.interfaces.HadesPacket;
-import com.wynntils.hades.protocol.interfaces.adapters.IHadesClientAdapter;
+import com.wynntils.hades.protocol.interfaces.adapters.IHadesServerAdapter;
 import com.wynntils.hades.utils.HadesBuffer;
 
-/**
- * Used for sending information to join a discord lobby to the client joining
- */
-public class HPacketDiscordLobbyServer implements HadesPacket<IHadesClientAdapter> {
+import java.util.UUID;
 
+/**
+ * Used for sending information to join a discord lobby to the server to send to
+ * the client joining
+ */
+public class HCPacketDiscordLobbyClient implements HadesPacket<IHadesServerAdapter> {
+
+    UUID joiningPlayer = null;
     long lobbyId = 0L;
     String lobbySecret = null;
 
-    public HPacketDiscordLobbyServer() { }
+    public HCPacketDiscordLobbyClient() { }
 
-    public HPacketDiscordLobbyServer(long lobbyId, String lobbySecret) {
+    public HCPacketDiscordLobbyClient(UUID joiningPlayer, long lobbyId, String lobbySecret) {
+        this.joiningPlayer = joiningPlayer;
         this.lobbyId = lobbyId;
         this.lobbySecret = lobbySecret;
     }
@@ -29,18 +34,20 @@ public class HPacketDiscordLobbyServer implements HadesPacket<IHadesClientAdapte
 
     @Override
     public void readData(HadesBuffer buffer) {
+        joiningPlayer = buffer.readUUID();
         lobbyId = buffer.readLong();
         lobbySecret = buffer.readString();
     }
 
     @Override
     public void writeData(HadesBuffer buffer) {
+        buffer.writeUUID(joiningPlayer);
         buffer.writeLong(lobbyId);
         buffer.writeString(lobbySecret);
     }
 
     @Override
-    public void process(IHadesClientAdapter handler) {
+    public void process(IHadesServerAdapter handler) {
         handler.handleDiscordLobbyServer(this);
     }
 

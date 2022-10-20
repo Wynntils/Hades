@@ -8,13 +8,13 @@ import com.wynntils.hades.utils.HadesBuffer;
  * Used for authentication.
  * The client sends their Athena token forwards the server which decides how to handle it.
  */
-public class HPacketAuthenticate implements HadesPacket<IHadesServerAdapter> {
+public class HCPacketAuthenticate implements HadesPacket<IHadesServerAdapter> {
 
     String token;
 
-    public HPacketAuthenticate() { }
+    public HCPacketAuthenticate() { }
 
-    public HPacketAuthenticate(String token) {
+    public HCPacketAuthenticate(String token) {
         this.token = token;
     }
 

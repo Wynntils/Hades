@@ -1,6 +1,6 @@
 package com.wynntils.hades.protocol.interfaces;
 
-import com.wynntils.hades.protocol.interfaces.adapters.IHadesServerAdapter;
+import com.wynntils.hades.objects.HadesConnection;
 
 public interface HadesHandlerFactory {
 
@@ -10,6 +10,6 @@ public interface HadesHandlerFactory {
      *
      * @return a new server adapter used for the incoming connection.
      */
-    IHadesServerAdapter createHandler();
+    IHadesAdapter createHandler(HadesConnection networkManager);
 
 }

@@ -8,19 +8,22 @@ import com.wynntils.hades.utils.HadesBuffer;
  * Handle client status updates.
  * Used for updating the user coordinates, life and mana.
  */
-public class HPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
+public class HCPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
 
     double x, y, z;
-    int life, mana;
+    double health, mana;
+    double maxHealth, maxMana;
 
-    public HPacketUpdateStatus() { }
+    public HCPacketUpdateStatus() { }
 
-    public HPacketUpdateStatus(double x, double y, double z, int life, int mana) {
+    public HCPacketUpdateStatus(double x, double y, double z, double health, double maxHealth, double mana, double maxMana) {
         this.x = x;
         this.y = y;
         this.z = z;
-        this.life = life;
+        this.health = health;
+        this.maxHealth = maxHealth;
         this.mana = mana;
+        this.maxMana = maxMana;
     }
 
     public double getX() {
@@ -35,12 +38,20 @@ public class HPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
         return z;
     }
 
-    public int getLife() {
-        return life;
+    public double getHealth() {
+        return health;
     }
 
-    public int getMana() {
+    public double getMana() {
         return mana;
+    }
+
+    public double getMaxHealth() {
+        return maxHealth;
+    }
+
+    public double getMaxMana() {
+        return maxMana;
     }
 
     @Override
@@ -48,8 +59,10 @@ public class HPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
         x = buffer.readDouble();
         y = buffer.readDouble();
         z = buffer.readDouble();
-        life = buffer.readVarInt();
-        mana = buffer.readVarInt();
+        health = buffer.readDouble();
+        maxHealth = buffer.readDouble();
+        mana = buffer.readDouble();
+        maxMana = buffer.readDouble();
     }
 
     @Override
@@ -57,8 +70,10 @@ public class HPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
         buffer.writeDouble(x);
         buffer.writeDouble(y);
         buffer.writeDouble(z);
-        buffer.writeVarInt(life);
-        buffer.writeVarInt(mana);
+        buffer.writeDouble(health);
+        buffer.writeDouble(maxHealth);
+        buffer.writeDouble(mana);
+        buffer.writeDouble(maxMana);
     }
 
     @Override

@@ -1,6 +1,5 @@
 package com.wynntils.hades.protocol.packets.server;
 
-import com.wynntils.hades.protocol.enums.PacketAction;
 import com.wynntils.hades.protocol.interfaces.HadesPacket;
 import com.wynntils.hades.protocol.interfaces.adapters.IHadesClientAdapter;
 import com.wynntils.hades.utils.HadesBuffer;
@@ -10,15 +9,15 @@ import java.util.UUID;
 /**
  * Used for updating mutual friends/party users their status.
  */
-public class HPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
+public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
 
     UUID user;
     double x, y, z;
-    int health, mana;
+    double health, mana;
 
-    public HPacketUpdateMutual() { }
+    public HSPacketUpdateMutual() { }
 
-    public HPacketUpdateMutual(UUID user, double x, double y, double z, int health, int mana) {
+    public HSPacketUpdateMutual(UUID user, double x, double y, double z, double health, double mana) {
         this.user = user;
         this.x = x;
         this.y = y;
@@ -43,11 +42,11 @@ public class HPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         return z;
     }
 
-    public int getHealth() {
+    public double getHealth() {
         return health;
     }
 
-    public int getMana() {
+    public double getMana() {
         return mana;
     }
 
@@ -57,8 +56,8 @@ public class HPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         x = buffer.readDouble();
         y = buffer.readDouble();
         z = buffer.readDouble();
-        health = buffer.readVarInt();
-        mana = buffer.readVarInt();
+        health = buffer.readDouble();
+        mana = buffer.readDouble();
     }
 
     @Override
@@ -67,8 +66,8 @@ public class HPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         buffer.writeDouble(x);
         buffer.writeDouble(y);
         buffer.writeDouble(z);
-        buffer.writeVarInt(health);
-        buffer.writeVarInt(mana);
+        buffer.writeDouble(health);
+        buffer.writeDouble(mana);
     }
 
     @Override
