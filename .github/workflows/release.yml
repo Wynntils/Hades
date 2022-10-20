@@ -35,6 +35,7 @@ jobs:
           release-count: 0
           pre-commit: ./.github/.pre-commit.js
           config-file-path: ./.github/.config.js
+          skip-version-file: true
           create-summary: true
           skip-git-pull: true
 
