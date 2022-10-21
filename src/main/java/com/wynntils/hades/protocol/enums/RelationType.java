@@ -5,5 +5,6 @@ package com.wynntils.hades.protocol.enums;
 public enum RelationType {
     PARTY,
     FRIEND,
-    GUILD
+    GUILD,
+    NONE
 }
