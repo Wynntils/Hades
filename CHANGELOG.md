@@ -1,15 +1,23 @@
+## [0.2.1](https://github.com/Wynntils/Hades/compare/v0.2.0...v0.2.1) (2022-10-21)
+
+
+### Bug Fixes
+
+* send packet to other players on status update ([67f3f9a](https://github.com/Wynntils/Hades/commit/67f3f9ac92716aae32c64c00947289f4d44d11f6))
+
 ## [0.2.0](https://github.com/Wynntils/Hades/compare/v0.1.0...v0.2.0) (2022-10-20)
-
-
-### Miscellaneous Chores
-
-* remove node files [skip ci] ([5a906ab](https://github.com/Wynntils/Hades/commit/5a906ab0e4d7711f563855aed74b62b654d59a01))
-* update readme [skip ci] ([ed5c10b](https://github.com/Wynntils/Hades/commit/ed5c10b779a723d0487e6d94c264d3e7108286b6))
 
 
 ### New Features
 
 * Add new PacketAction type ([#3](https://github.com/Wynntils/Hades/issues/3)) ([295b966](https://github.com/Wynntils/Hades/commit/295b9662a02f18cf1fae43c437f1efe73f222276))
+
+
+### Miscellaneous Chores
+
+* **release:** v0.2.0 [skip ci] ([73411f8](https://github.com/Wynntils/Hades/commit/73411f88345cbcdb5e40ae685061b2c78a5212b6))
+* remove node files [skip ci] ([5a906ab](https://github.com/Wynntils/Hades/commit/5a906ab0e4d7711f563855aed74b62b654d59a01))
+* update readme [skip ci] ([ed5c10b](https://github.com/Wynntils/Hades/commit/ed5c10b779a723d0487e6d94c264d3e7108286b6))
 
 ## [0.1.0](https://github.com/Wynntils/Hades/compare/080de3183bc4aa5212b482cd9702c61faf83235a...v0.1.0) (2022-10-20)
 
