@@ -1,9 +1,21 @@
+## [0.2.2](https://github.com/Wynntils/Hades/compare/v0.2.1...v0.2.2) (2022-10-21)
+
+
+### Bug Fixes
+
+* HSPacketUpdateMutual packet contains more information ([#6](https://github.com/Wynntils/Hades/issues/6)) ([68f3fe1](https://github.com/Wynntils/Hades/commit/68f3fe132e4c97adbea4e5b92ac280ce3027e5b1))
+
 ## [0.2.1](https://github.com/Wynntils/Hades/compare/v0.2.0...v0.2.1) (2022-10-21)
 
 
 ### Bug Fixes
 
 * send packet to other players on status update ([67f3f9a](https://github.com/Wynntils/Hades/commit/67f3f9ac92716aae32c64c00947289f4d44d11f6))
+
+
+### Miscellaneous Chores
+
+* **release:** v0.2.1 [skip ci] ([d420527](https://github.com/Wynntils/Hades/commit/d42052776d6aaa71554dd571cde41baf4328d845))
 
 ## [0.2.0](https://github.com/Wynntils/Hades/compare/v0.1.0...v0.2.0) (2022-10-20)
 
