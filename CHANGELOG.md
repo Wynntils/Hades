@@ -1,9 +1,21 @@
+## [0.2.3](https://github.com/Wynntils/Hades/compare/v0.2.2...v0.2.3) (2022-10-21)
+
+
+### Bug Fixes
+
+* HSPacketUpdateMutual and HCPacketUpdateStatus should not use doubles for health and mana info ([#7](https://github.com/Wynntils/Hades/issues/7)) ([808905b](https://github.com/Wynntils/Hades/commit/808905bfc5e6c9fcfb96694e05bb5562d4fb1aeb))
+
 ## [0.2.2](https://github.com/Wynntils/Hades/compare/v0.2.1...v0.2.2) (2022-10-21)
 
 
 ### Bug Fixes
 
 * HSPacketUpdateMutual packet contains more information ([#6](https://github.com/Wynntils/Hades/issues/6)) ([68f3fe1](https://github.com/Wynntils/Hades/commit/68f3fe132e4c97adbea4e5b92ac280ce3027e5b1))
+
+
+### Miscellaneous Chores
+
+* **release:** v0.2.2 [skip ci] ([96f1ccf](https://github.com/Wynntils/Hades/commit/96f1ccf46b01108a15ff330435c9fadc9763ae21))
 
 ## [0.2.1](https://github.com/Wynntils/Hades/compare/v0.2.0...v0.2.1) (2022-10-21)
 
