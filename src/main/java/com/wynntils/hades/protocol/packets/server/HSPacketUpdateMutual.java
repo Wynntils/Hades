@@ -1,5 +1,6 @@
 package com.wynntils.hades.protocol.packets.server;
 
+import com.wynntils.hades.protocol.enums.RelationType;
 import com.wynntils.hades.protocol.interfaces.HadesPacket;
 import com.wynntils.hades.protocol.interfaces.adapters.IHadesClientAdapter;
 import com.wynntils.hades.utils.HadesBuffer;
@@ -7,19 +8,21 @@ import com.wynntils.hades.utils.HadesBuffer;
 import java.util.UUID;
 
 /**
- * Used for updating mutual friends/party users their status.
+ * Used for updating mutual friends/party users' statuses when they are on the same server as the client.
  */
 public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
-
     UUID user;
+    String name;
     double x, y, z;
     double health, mana;
     double maxHealth, maxMana;
+    RelationType relationType;
 
     public HSPacketUpdateMutual() { }
 
-    public HSPacketUpdateMutual(UUID user, double x, double y, double z, double health, double maxHealth, double mana, double maxMana) {
+    public HSPacketUpdateMutual(UUID user, String name, double x, double y, double z, double health, double maxHealth, double mana, double maxMana, RelationType relationType) {
         this.user = user;
+        this.name = name;
         this.x = x;
         this.y = y;
         this.z = z;
@@ -27,10 +30,15 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         this.maxHealth = maxHealth;
         this.mana = mana;
         this.maxMana = maxMana;
+        this.relationType = relationType;
     }
 
     public UUID getUser() {
         return user;
+    }
+
+    public String getName() {
+        return name;
     }
 
     public double getX() {
@@ -61,9 +69,14 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         return maxMana;
     }
 
+    public RelationType getRelationType() {
+        return relationType;
+    }
+
     @Override
     public void readData(HadesBuffer buffer) {
         user = buffer.readUUID();
+        name = buffer.readString();
         x = buffer.readDouble();
         y = buffer.readDouble();
         z = buffer.readDouble();
@@ -71,11 +84,13 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         maxHealth = buffer.readDouble();
         mana = buffer.readDouble();
         maxMana = buffer.readDouble();
+        relationType = buffer.readEnum(RelationType.class);
     }
 
     @Override
     public void writeData(HadesBuffer buffer) {
         buffer.writeUUID(user);
+        buffer.writeString(name);
         buffer.writeDouble(x);
         buffer.writeDouble(y);
         buffer.writeDouble(z);
@@ -83,11 +98,11 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         buffer.writeDouble(maxHealth);
         buffer.writeDouble(mana);
         buffer.writeDouble(maxMana);
+        buffer.writeEnum(relationType);
     }
 
     @Override
     public void process(IHadesClientAdapter handler) {
         handler.handleUpdateMutual(this);
     }
-
 }
