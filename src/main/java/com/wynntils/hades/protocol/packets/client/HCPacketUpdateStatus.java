@@ -11,12 +11,12 @@ import com.wynntils.hades.utils.HadesBuffer;
 public class HCPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
 
     double x, y, z;
-    double health, mana;
-    double maxHealth, maxMana;
+    int health, mana;
+    int maxHealth, maxMana;
 
     public HCPacketUpdateStatus() { }
 
-    public HCPacketUpdateStatus(double x, double y, double z, double health, double maxHealth, double mana, double maxMana) {
+    public HCPacketUpdateStatus(double x, double y, double z, int health, int maxHealth, int mana, int maxMana) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -38,19 +38,19 @@ public class HCPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
         return z;
     }
 
-    public double getHealth() {
+    public int getHealth() {
         return health;
     }
 
-    public double getMana() {
+    public int getMana() {
         return mana;
     }
 
-    public double getMaxHealth() {
+    public int getMaxHealth() {
         return maxHealth;
     }
 
-    public double getMaxMana() {
+    public int getMaxMana() {
         return maxMana;
     }
 
@@ -59,10 +59,10 @@ public class HCPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
         x = buffer.readDouble();
         y = buffer.readDouble();
         z = buffer.readDouble();
-        health = buffer.readDouble();
-        maxHealth = buffer.readDouble();
-        mana = buffer.readDouble();
-        maxMana = buffer.readDouble();
+        health = buffer.readInt();
+        maxHealth = buffer.readInt();
+        mana = buffer.readInt();
+        maxMana = buffer.readInt();
     }
 
     @Override
@@ -70,10 +70,10 @@ public class HCPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
         buffer.writeDouble(x);
         buffer.writeDouble(y);
         buffer.writeDouble(z);
-        buffer.writeDouble(health);
-        buffer.writeDouble(maxHealth);
-        buffer.writeDouble(mana);
-        buffer.writeDouble(maxMana);
+        buffer.writeInt(health);
+        buffer.writeInt(maxHealth);
+        buffer.writeInt(mana);
+        buffer.writeInt(maxMana);
     }
 
     @Override

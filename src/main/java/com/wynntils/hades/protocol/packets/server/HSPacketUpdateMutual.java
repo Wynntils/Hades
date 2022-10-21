@@ -14,13 +14,13 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
     UUID user;
     String name;
     double x, y, z;
-    double health, mana;
-    double maxHealth, maxMana;
+    int health, mana;
+    int maxHealth, maxMana;
     RelationType relationType;
 
     public HSPacketUpdateMutual() { }
 
-    public HSPacketUpdateMutual(UUID user, String name, double x, double y, double z, double health, double maxHealth, double mana, double maxMana, RelationType relationType) {
+    public HSPacketUpdateMutual(UUID user, String name, double x, double y, double z, int health, int maxHealth, int mana, int maxMana, RelationType relationType) {
         this.user = user;
         this.name = name;
         this.x = x;
@@ -53,19 +53,19 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         return z;
     }
 
-    public double getHealth() {
+    public int getHealth() {
         return health;
     }
 
-    public double getMaxHealth() {
+    public int getMaxHealth() {
         return maxHealth;
     }
 
-    public double getMana() {
+    public int getMana() {
         return mana;
     }
 
-    public double getMaxMana() {
+    public int getMaxMana() {
         return maxMana;
     }
 
@@ -80,10 +80,10 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         x = buffer.readDouble();
         y = buffer.readDouble();
         z = buffer.readDouble();
-        health = buffer.readDouble();
-        maxHealth = buffer.readDouble();
-        mana = buffer.readDouble();
-        maxMana = buffer.readDouble();
+        health = buffer.readInt();
+        maxHealth = buffer.readInt();
+        mana = buffer.readInt();
+        maxMana = buffer.readInt();
         relationType = buffer.readEnum(RelationType.class);
     }
 
@@ -94,10 +94,10 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         buffer.writeDouble(x);
         buffer.writeDouble(y);
         buffer.writeDouble(z);
-        buffer.writeDouble(health);
-        buffer.writeDouble(maxHealth);
-        buffer.writeDouble(mana);
-        buffer.writeDouble(maxMana);
+        buffer.writeInt(health);
+        buffer.writeInt(maxHealth);
+        buffer.writeInt(mana);
+        buffer.writeInt(maxMana);
         buffer.writeEnum(relationType);
     }
 
