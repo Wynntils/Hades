@@ -10,13 +10,13 @@ import com.wynntils.hades.utils.HadesBuffer;
  */
 public class HCPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
 
-    double x, y, z;
+    float x, y, z;
     int health, mana;
     int maxHealth, maxMana;
 
     public HCPacketUpdateStatus() { }
 
-    public HCPacketUpdateStatus(double x, double y, double z, int health, int maxHealth, int mana, int maxMana) {
+    public HCPacketUpdateStatus(float x, float y, float z, int health, int maxHealth, int mana, int maxMana) {
         this.x = x;
         this.y = y;
         this.z = z;
@@ -26,15 +26,15 @@ public class HCPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
         this.maxMana = maxMana;
     }
 
-    public double getX() {
+    public float getX() {
         return x;
     }
 
-    public double getY() {
+    public float getY() {
         return y;
     }
 
-    public double getZ() {
+    public float getZ() {
         return z;
     }
 
@@ -56,9 +56,9 @@ public class HCPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
 
     @Override
     public void readData(HadesBuffer buffer) {
-        x = buffer.readDouble();
-        y = buffer.readDouble();
-        z = buffer.readDouble();
+        x = buffer.readFloat();
+        y = buffer.readFloat();
+        z = buffer.readFloat();
         health = buffer.readInt();
         maxHealth = buffer.readInt();
         mana = buffer.readInt();
@@ -67,9 +67,9 @@ public class HCPacketUpdateStatus implements HadesPacket<IHadesServerAdapter> {
 
     @Override
     public void writeData(HadesBuffer buffer) {
-        buffer.writeDouble(x);
-        buffer.writeDouble(y);
-        buffer.writeDouble(z);
+        buffer.writeFloat(x);
+        buffer.writeFloat(y);
+        buffer.writeFloat(z);
         buffer.writeInt(health);
         buffer.writeInt(maxHealth);
         buffer.writeInt(mana);
