@@ -13,14 +13,14 @@ import java.util.UUID;
 public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
     UUID user;
     String name;
-    double x, y, z;
+    float x, y, z;
     int health, mana;
     int maxHealth, maxMana;
     RelationType relationType;
 
     public HSPacketUpdateMutual() { }
 
-    public HSPacketUpdateMutual(UUID user, String name, double x, double y, double z, int health, int maxHealth, int mana, int maxMana, RelationType relationType) {
+    public HSPacketUpdateMutual(UUID user, String name, float x, float y, float z, int health, int maxHealth, int mana, int maxMana, RelationType relationType) {
         this.user = user;
         this.name = name;
         this.x = x;
@@ -41,15 +41,15 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         return name;
     }
 
-    public double getX() {
+    public float getX() {
         return x;
     }
 
-    public double getY() {
+    public float getY() {
         return y;
     }
 
-    public double getZ() {
+    public float getZ() {
         return z;
     }
 
@@ -77,9 +77,9 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
     public void readData(HadesBuffer buffer) {
         user = buffer.readUUID();
         name = buffer.readString();
-        x = buffer.readDouble();
-        y = buffer.readDouble();
-        z = buffer.readDouble();
+        x = buffer.readFloat();
+        y = buffer.readFloat();
+        z = buffer.readFloat();
         health = buffer.readInt();
         maxHealth = buffer.readInt();
         mana = buffer.readInt();
@@ -91,9 +91,9 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
     public void writeData(HadesBuffer buffer) {
         buffer.writeUUID(user);
         buffer.writeString(name);
-        buffer.writeDouble(x);
-        buffer.writeDouble(y);
-        buffer.writeDouble(z);
+        buffer.writeFloat(x);
+        buffer.writeFloat(y);
+        buffer.writeFloat(z);
         buffer.writeInt(health);
         buffer.writeInt(maxHealth);
         buffer.writeInt(mana);
