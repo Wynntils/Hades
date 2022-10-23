@@ -42,4 +42,11 @@ public interface IHadesClientAdapter extends IHadesAdapter {
      * @param packet the packet itself
      */
     void handleAuthenticationResponse(HSPacketAuthenticationResponse packet);
+
+    /**
+     * Used to indicate that the client is still connected
+     *
+     * @param packet the packet itself
+     */
+    void handlePing(HSPacketPong packet);
 }

@@ -58,4 +58,11 @@ public interface IHadesServerAdapter extends IHadesAdapter {
      * @param packet the packet itself
      */
     void handleUpdateGuild(HCPacketUpdateGuild packet);
+
+    /**
+     * Handles the server response to the client ping packet
+     *
+     * @param packet the packet itself
+     */
+    void handlePing(HCPacketPing packet);
 }
