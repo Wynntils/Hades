@@ -1,9 +1,21 @@
+## [0.4.0](https://github.com/Wynntils/Hades/compare/v0.3.0...v0.4.0) (2022-10-23)
+
+
+### New Features
+
+* Implement ping-pong packet pair ([#9](https://github.com/Wynntils/Hades/issues/9)) ([e17fa61](https://github.com/Wynntils/Hades/commit/e17fa61f0b2b68540a79b566aa57ae58ef440e7b))
+
 ## [0.3.0](https://github.com/Wynntils/Hades/compare/v0.2.3...v0.3.0) (2022-10-22)
 
 
 ### New Features
 
 * HSPacketUpdateMutual and HCPacketUpdateStatus use float for location ([#8](https://github.com/Wynntils/Hades/issues/8)) ([e817e4e](https://github.com/Wynntils/Hades/commit/e817e4e90a6c60e2479832bcac047cb33723abf8))
+
+
+### Miscellaneous Chores
+
+* **release:** v0.3.0 [skip ci] ([c13fa8a](https://github.com/Wynntils/Hades/commit/c13fa8a68d06498fbea57abe02d1185b96b0ed8b))
 
 ## [0.2.3](https://github.com/Wynntils/Hades/compare/v0.2.2...v0.2.3) (2022-10-21)
 
