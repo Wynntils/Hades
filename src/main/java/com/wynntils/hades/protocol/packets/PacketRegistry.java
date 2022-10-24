@@ -18,6 +18,7 @@ public enum PacketRegistry {
             registerPacket(HSPacketUpdateMutual.class);
             registerPacket(HSPacketDiscordLobbyServer.class);
             registerPacket(HSPacketClearMutual.class);
+            registerPacket(HSPacketPong.class);
         }
     },
 
@@ -32,6 +33,7 @@ public enum PacketRegistry {
             registerPacket(HCPacketUpdateStatus.class);
             registerPacket(HCPacketDiscordLobbyClient.class);
             registerPacket(HCPacketUpdateWorld.class);
+            registerPacket(HCPacketPing.class);
         }
     };
 
