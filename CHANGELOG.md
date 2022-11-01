@@ -1,9 +1,21 @@
+## [0.5.0](https://github.com/Wynntils/Hades/compare/v0.4.1...v0.5.0) (2022-11-01)
+
+
+### New Features
+
+* HSPacketUpdateMutual packet contains more information ([#12](https://github.com/Wynntils/Hades/issues/12)) ([2dbc939](https://github.com/Wynntils/Hades/commit/2dbc939ce431c554477690f594c48698e0fd11e3))
+
 ## [0.4.1](https://github.com/Wynntils/Hades/compare/v0.4.0...v0.4.1) (2022-10-24)
 
 
 ### Bug Fixes
 
 * Register ping packets ([#10](https://github.com/Wynntils/Hades/issues/10)) ([4e6576e](https://github.com/Wynntils/Hades/commit/4e6576e04f21a2b9dfee7716f871ea8cbff3529c))
+
+
+### Miscellaneous Chores
+
+* **release:** v0.4.1 [skip ci] ([378d2e1](https://github.com/Wynntils/Hades/commit/378d2e1a85e201bba90b6fd07166c9a7374bab92))
 
 ## [0.4.0](https://github.com/Wynntils/Hades/compare/v0.3.0...v0.4.0) (2022-10-23)
 
