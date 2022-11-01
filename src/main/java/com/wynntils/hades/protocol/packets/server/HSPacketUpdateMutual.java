@@ -16,11 +16,13 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
     float x, y, z;
     int health, mana;
     int maxHealth, maxMana;
-    RelationType relationType;
+    boolean isPartyMember;
+    boolean isMutualFriend;
+    boolean isGuildMember;
 
     public HSPacketUpdateMutual() { }
 
-    public HSPacketUpdateMutual(UUID user, String name, float x, float y, float z, int health, int maxHealth, int mana, int maxMana, RelationType relationType) {
+    public HSPacketUpdateMutual(UUID user, String name, float x, float y, float z, int health, int maxHealth, int mana, int maxMana, boolean isPartyMember, boolean isMutualFriend, boolean isGuildMember) {
         this.user = user;
         this.name = name;
         this.x = x;
@@ -30,7 +32,9 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         this.maxHealth = maxHealth;
         this.mana = mana;
         this.maxMana = maxMana;
-        this.relationType = relationType;
+        this.isPartyMember = isPartyMember;
+        this.isMutualFriend = isMutualFriend;
+        this.isGuildMember = isGuildMember;
     }
 
     public UUID getUser() {
@@ -69,8 +73,16 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         return maxMana;
     }
 
-    public RelationType getRelationType() {
-        return relationType;
+    public boolean isPartyMember() {
+        return isPartyMember;
+    }
+
+    public boolean isMutualFriend() {
+        return isMutualFriend;
+    }
+
+    public boolean isGuildMember() {
+        return isGuildMember;
     }
 
     @Override
@@ -84,7 +96,9 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         maxHealth = buffer.readInt();
         mana = buffer.readInt();
         maxMana = buffer.readInt();
-        relationType = buffer.readEnum(RelationType.class);
+        isPartyMember = buffer.readBoolean();
+        isMutualFriend = buffer.readBoolean();
+        isGuildMember = buffer.readBoolean();
     }
 
     @Override
@@ -98,7 +112,9 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         buffer.writeInt(maxHealth);
         buffer.writeInt(mana);
         buffer.writeInt(maxMana);
-        buffer.writeEnum(relationType);
+        buffer.writeBoolean(isPartyMember);
+        buffer.writeBoolean(isMutualFriend);
+        buffer.writeBoolean(isGuildMember);
     }
 
     @Override
