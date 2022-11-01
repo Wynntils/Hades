@@ -16,14 +16,13 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
     float x, y, z;
     int health, mana;
     int maxHealth, maxMana;
-    RelationType dominantRelation;
     boolean isPartyMember;
     boolean isMutualFriend;
     boolean isGuildMember;
 
     public HSPacketUpdateMutual() { }
 
-    public HSPacketUpdateMutual(UUID user, String name, float x, float y, float z, int health, int maxHealth, int mana, int maxMana, RelationType dominantRelation, boolean isPartyMember, boolean isMutualFriend, boolean isGuildMember) {
+    public HSPacketUpdateMutual(UUID user, String name, float x, float y, float z, int health, int maxHealth, int mana, int maxMana, boolean isPartyMember, boolean isMutualFriend, boolean isGuildMember) {
         this.user = user;
         this.name = name;
         this.x = x;
@@ -33,7 +32,6 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         this.maxHealth = maxHealth;
         this.mana = mana;
         this.maxMana = maxMana;
-        this.dominantRelation = dominantRelation;
         this.isPartyMember = isPartyMember;
         this.isMutualFriend = isMutualFriend;
         this.isGuildMember = isGuildMember;
@@ -75,10 +73,6 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         return maxMana;
     }
 
-    public RelationType getDominantRelation() {
-        return dominantRelation;
-    }
-
     public boolean isPartyMember() {
         return isPartyMember;
     }
@@ -102,7 +96,6 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         maxHealth = buffer.readInt();
         mana = buffer.readInt();
         maxMana = buffer.readInt();
-        dominantRelation = buffer.readEnum(RelationType.class);
         isPartyMember = buffer.readBoolean();
         isMutualFriend = buffer.readBoolean();
         isGuildMember = buffer.readBoolean();
@@ -119,7 +112,6 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         buffer.writeInt(maxHealth);
         buffer.writeInt(mana);
         buffer.writeInt(maxMana);
-        buffer.writeEnum(dominantRelation);
         buffer.writeBoolean(isPartyMember);
         buffer.writeBoolean(isMutualFriend);
         buffer.writeBoolean(isGuildMember);
