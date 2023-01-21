@@ -11,25 +11,37 @@ import com.wynntils.hades.utils.HadesBuffer;
 public class HCPacketAuthenticate implements HadesPacket<IHadesServerAdapter> {
 
     String token;
+    String version = null;
 
     public HCPacketAuthenticate() { }
 
-    public HCPacketAuthenticate(String token) {
+    public HCPacketAuthenticate(String token, String version) {
         this.token = token;
+        this.version = version;
     }
 
     public String getToken() {
         return token;
     }
 
+    public String getVersion() {
+        return version;
+    }
+
     @Override
     public void readData(HadesBuffer buffer) {
         token = buffer.readString();
+        // if there is more data, read it
+        // this is for backwards compatibility
+        if (buffer.readableBytes() > 0) {
+            version = buffer.readString();
+        }
     }
 
     @Override
     public void writeData(HadesBuffer buffer) {
         buffer.writeString(token);
+        buffer.writeString(version);
     }
 
     @Override
