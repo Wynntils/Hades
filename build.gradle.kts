@@ -14,7 +14,7 @@ repositories {
 }
 
 dependencies {
-    implementation("io.netty:netty-all:4.1.118.Final") // needs to match MC version
+    implementation("io.netty:netty-all:4.2.7.Final") // needs to match MC version
     implementation("com.google.guava:guava:31.0.1-jre") // matches MC version
 }
 
