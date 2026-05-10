@@ -7,7 +7,7 @@ plugins {
 }
 
 group = "com.wynntils.hades"
-version = "0.6.1"
+version = "0.6.2"
 
 repositories {
     mavenCentral()
@@ -15,7 +15,7 @@ repositories {
 
 dependencies {
     implementation("io.netty:netty-all:4.2.7.Final") // needs to match MC version
-    implementation("com.google.guava:guava:31.0.1-jre") // matches MC version
+    implementation("com.google.guava:guava:33.5.0-jre") // matches MC version
 }
 
 publishing {
