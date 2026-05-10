@@ -150,8 +150,8 @@ public class HadesConnection extends SimpleChannelInboundHandler<HadesPacket<?>>
      * @param cause the throwable
      */
     @Override
-    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause)  {
-        cause.printStackTrace();
+    public void exceptionCaught(ChannelHandlerContext ctx, Throwable cause) {
+        ctx.close();
     }
 
 }
