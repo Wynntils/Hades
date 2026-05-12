@@ -12,7 +12,17 @@ public class HCPacketGearUpdate implements HadesPacket<IHadesServerAdapter> {
 
     String helmet, chestplate, leggings, boots, ringOne, ringTwo, bracelet, necklace, heldItem;
 
-    public HCPacketGearUpdate() { }
+    public HCPacketGearUpdate() {
+        this.helmet = "";
+        this.chestplate = "";
+        this.leggings = "";
+        this.boots = "";
+        this.ringOne = "";
+        this.ringTwo = "";
+        this.bracelet = "";
+        this.necklace = "";
+        this.heldItem = "";
+    }
 
     public HCPacketGearUpdate(String helmet, String chestplate, String leggings, String boots,
                               String ringOne, String ringTwo, String bracelet, String necklace,

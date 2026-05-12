@@ -156,6 +156,12 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         return heldItem;
     }
 
+    /**
+     * Returns true if gear data was present in the wire buffer.
+     * Note: returns false both when the sender omitted gear AND when all nine
+     * gear strings are empty — these cases are indistinguishable on the wire.
+     * Receivers must treat hasGear() == false as "do not update gear display".
+     */
     public boolean hasGear() {
         return hasGear;
     }
