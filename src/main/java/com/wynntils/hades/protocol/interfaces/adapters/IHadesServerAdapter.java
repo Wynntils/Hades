@@ -65,4 +65,13 @@ public interface IHadesServerAdapter extends IHadesAdapter {
      * @param packet the packet itself
      */
     void handlePing(HCPacketPing packet);
+
+    /**
+     * Used to update the player's gear independently of position/vitals.
+     * Sent on gear change and once on initial login/world load.
+     * @see HCPacketGearUpdate
+     *
+     * @param packet the packet itself
+     */
+    void handleGearUpdate(HCPacketGearUpdate packet);
 }

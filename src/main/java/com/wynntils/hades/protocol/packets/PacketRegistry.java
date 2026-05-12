@@ -34,6 +34,7 @@ public enum PacketRegistry {
             registerPacket(HCPacketDiscordLobbyClient.class);
             registerPacket(HCPacketUpdateWorld.class);
             registerPacket(HCPacketPing.class);
+            registerPacket(HCPacketGearUpdate.class);
         }
     };
 
