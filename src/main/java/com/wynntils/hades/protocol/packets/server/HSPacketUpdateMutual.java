@@ -20,6 +20,7 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
     boolean isMutualFriend;
     boolean isGuildMember;
     String helmet, chestplate, leggings, boots, ringOne, ringTwo, bracelet, necklace, heldItem;
+    private boolean hasGear = false;
 
     public HSPacketUpdateMutual() { }
 
@@ -155,6 +156,16 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         return heldItem;
     }
 
+    /**
+     * Returns true if gear data was present in the wire buffer.
+     * Note: returns false both when the sender omitted gear AND when all nine
+     * gear strings are empty — these cases are indistinguishable on the wire.
+     * Receivers must treat hasGear() == false as "do not update gear display".
+     */
+    public boolean hasGear() {
+        return hasGear;
+    }
+
     @Override
     public void readData(HadesBuffer buffer) {
         user = buffer.readUUID();
@@ -171,6 +182,7 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
         isGuildMember = buffer.readBoolean();
 
         if (buffer.readableBytes() > 0) {
+            hasGear = true;
             helmet = buffer.readString();
             chestplate = buffer.readString();
             leggings = buffer.readString();
@@ -181,6 +193,7 @@ public class HSPacketUpdateMutual implements HadesPacket<IHadesClientAdapter> {
             necklace = buffer.readString();
             heldItem = buffer.readString();
         } else {
+            hasGear = false;
             helmet = "";
             chestplate = "";
             leggings = "";
