@@ -59,4 +59,9 @@ public class HadesCompressionDecoder extends ByteToMessageDecoder {
         out.add(Unpooled.wrappedBuffer(output));
     }
 
+    @Override
+    protected void handlerRemoved0(ChannelHandlerContext ctx) {
+        inflater.end();
+    }
+
 }

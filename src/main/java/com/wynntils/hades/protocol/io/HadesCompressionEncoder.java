@@ -56,4 +56,9 @@ public class HadesCompressionEncoder extends MessageToByteEncoder<ByteBuf> {
         deflater.reset();
     }
 
+    @Override
+    public void handlerRemoved(ChannelHandlerContext ctx) {
+        deflater.end();
+    }
+
 }
