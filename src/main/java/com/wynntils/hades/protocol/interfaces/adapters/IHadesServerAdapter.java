@@ -74,4 +74,18 @@ public interface IHadesServerAdapter extends IHadesAdapter {
      * @param packet the packet itself
      */
     void handleGearUpdate(HCPacketGearUpdate packet);
+
+    /**
+     * Voice: request a voice secret / (re)start a voice session.
+     * Default no-op so pre-0.7.0 servers keep compiling.
+     */
+    default void handleVoiceJoin(HCPacketVoiceJoin packet) { }
+
+    default void handleVoiceUpdate(HCPacketVoiceUpdate packet) { }
+
+    default void handleVoiceLeave(HCPacketVoiceLeave packet) { }
+
+    default void handleVoiceBlock(HCPacketVoiceBlock packet) { }
+
+    default void handleVoiceReport(HCPacketVoiceReport packet) { }
 }

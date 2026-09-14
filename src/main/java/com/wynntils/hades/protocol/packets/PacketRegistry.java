@@ -35,6 +35,11 @@ public enum PacketRegistry {
             registerPacket(HCPacketUpdateWorld.class);
             registerPacket(HCPacketPing.class);
             registerPacket(HCPacketGearUpdate.class);
+            registerPacket(HCPacketVoiceJoin.class);
+            registerPacket(HCPacketVoiceUpdate.class);
+            registerPacket(HCPacketVoiceLeave.class);
+            registerPacket(HCPacketVoiceBlock.class);
+            registerPacket(HCPacketVoiceReport.class);
         }
     };
 
