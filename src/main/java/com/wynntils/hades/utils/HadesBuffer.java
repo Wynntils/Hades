@@ -151,6 +151,24 @@ public class HadesBuffer extends ByteBuf {
         return result;
     }
 
+    public HadesBuffer writeByteArray(byte[] bytes) {
+        this.writeVarInt(bytes.length);
+        this.writeBytes(bytes);
+        return this;
+    }
+
+    public byte[] readByteArray(int maxLength) {
+        int length = this.readVarInt();
+
+        if (length < 0 || length > maxLength) {
+            throw new DecoderException("Byte array length " + length + " is outside 0.." + maxLength);
+        }
+
+        byte[] bytes = new byte[length];
+        this.readBytes(bytes);
+        return bytes;
+    }
+
     public HadesBuffer writeEnum(Enum<?> value) {
         return this.writeVarInt(value.ordinal());
     }
