@@ -19,6 +19,10 @@ public enum PacketRegistry {
             registerPacket(HSPacketDiscordLobbyServer.class);
             registerPacket(HSPacketClearMutual.class);
             registerPacket(HSPacketPong.class);
+            registerPacket(HSPacketVoiceSecret.class);
+            registerPacket(HSPacketVoiceEnded.class);
+            registerPacket(HSPacketVoicePeers.class);
+            registerPacket(HSPacketVoiceResult.class);
         }
     },
 

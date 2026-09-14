@@ -49,4 +49,15 @@ public interface IHadesClientAdapter extends IHadesAdapter {
      * @param packet the packet itself
      */
     void handlePing(HSPacketPong packet);
+
+    /**
+     * Voice packets — default no-ops so pre-0.7.0 clients keep compiling.
+     */
+    default void handleVoiceSecret(HSPacketVoiceSecret packet) { }
+
+    default void handleVoiceEnded(HSPacketVoiceEnded packet) { }
+
+    default void handleVoicePeers(HSPacketVoicePeers packet) { }
+
+    default void handleVoiceResult(HSPacketVoiceResult packet) { }
 }
