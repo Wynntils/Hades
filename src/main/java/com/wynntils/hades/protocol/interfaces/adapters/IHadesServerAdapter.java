@@ -74,4 +74,11 @@ public interface IHadesServerAdapter extends IHadesAdapter {
      * @param packet the packet itself
      */
     void handleGearUpdate(HCPacketGearUpdate packet);
+
+    /**
+     * Used to handle player pings
+     *
+     * @param packet the packet itself
+     */
+    void handlePlayerPing(HCPacketPlayerPing packet);
 }
