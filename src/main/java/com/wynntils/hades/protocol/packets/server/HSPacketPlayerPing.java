@@ -9,15 +9,17 @@ public class HSPacketPlayerPing implements HadesPacket<IHadesClientAdapter> {
     String username;
     float x, y, z;
     PlayerPingType pingType;
+    String pingTarget;
 
     public HSPacketPlayerPing() { }
 
-    public HSPacketPlayerPing(String username, float x, float y, float z, PlayerPingType pingType) {
+    public HSPacketPlayerPing(String username, float x, float y, float z, PlayerPingType pingType, String pingTarget) {
         this.username = username;
         this.x = x;
         this.y = y;
         this.z = z;
         this.pingType = pingType;
+        this.pingTarget = pingTarget;
     }
 
     public String getUsername() {
@@ -40,6 +42,10 @@ public class HSPacketPlayerPing implements HadesPacket<IHadesClientAdapter> {
         return pingType;
     }
 
+    public String getPingTarget() {
+        return pingTarget;
+    }
+
     @Override
     public void readData(HadesBuffer buffer) {
         username = buffer.readString();
@@ -47,6 +53,7 @@ public class HSPacketPlayerPing implements HadesPacket<IHadesClientAdapter> {
         y = buffer.readFloat();
         z = buffer.readFloat();
         pingType = buffer.readEnum(PlayerPingType.class);
+        pingTarget = buffer.readString();
     }
 
     @Override
@@ -56,6 +63,7 @@ public class HSPacketPlayerPing implements HadesPacket<IHadesClientAdapter> {
         buffer.writeFloat(y);
         buffer.writeFloat(z);
         buffer.writeEnum(pingType);
+        buffer.writeString(pingTarget);
     }
 
     @Override
