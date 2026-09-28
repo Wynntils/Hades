@@ -1,12 +1,12 @@
 package com.wynntils.hades.protocol.enums;
 
 public enum PlayerPingType {
-    FOCUS(16777215),
-    NEED_HELP(10217381),
-    WAIT_HERE(8246268),
-    ATTACK_HERE(16735324),
-    LOOK_HERE(16770669),
-    GROUP_UP(5209343);
+    FOCUS(0xFFFFFFFF),
+    NEED_HELP(0xFF9BE7A5),
+    WAIT_HERE(0xFF7DD3FC),
+    ATTACK_HERE(0xFFFF5C5C),
+    LOOK_HERE(0xFFFFE66D),
+    GROUP_UP(0xFF4F7CFF);
 
     private final int color;
 
