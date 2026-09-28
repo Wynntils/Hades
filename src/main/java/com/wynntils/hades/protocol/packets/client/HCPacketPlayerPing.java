@@ -1,5 +1,6 @@
 package com.wynntils.hades.protocol.packets.client;
 
+import com.wynntils.hades.protocol.enums.Direction;
 import com.wynntils.hades.protocol.enums.PlayerPingType;
 import com.wynntils.hades.protocol.interfaces.HadesPacket;
 import com.wynntils.hades.protocol.interfaces.adapters.IHadesServerAdapter;
@@ -8,15 +9,17 @@ import com.wynntils.hades.utils.HadesBuffer;
 public class HCPacketPlayerPing implements HadesPacket<IHadesServerAdapter> {
 
     float x, y, z;
+    Direction direction;
     PlayerPingType pingType;
     String pingTarget;
 
     public HCPacketPlayerPing() { }
 
-    public HCPacketPlayerPing(float x, float y, float z, PlayerPingType pingType, String pingTarget) {
+    public HCPacketPlayerPing(float x, float y, float z, Direction direction, PlayerPingType pingType, String pingTarget) {
         this.x = x;
         this.y = y;
         this.z = z;
+        this.direction = direction;
         this.pingType = pingType;
         this.pingTarget = pingTarget;
     }
@@ -33,6 +36,10 @@ public class HCPacketPlayerPing implements HadesPacket<IHadesServerAdapter> {
         return z;
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
     public PlayerPingType getPingType() {
         return pingType;
     }
@@ -46,6 +53,7 @@ public class HCPacketPlayerPing implements HadesPacket<IHadesServerAdapter> {
         x = buffer.readFloat();
         y = buffer.readFloat();
         z = buffer.readFloat();
+        direction = buffer.readEnum(Direction.class);
         pingType = buffer.readEnum(PlayerPingType.class);
         pingTarget = buffer.readString();
     }
@@ -55,6 +63,7 @@ public class HCPacketPlayerPing implements HadesPacket<IHadesServerAdapter> {
         buffer.writeFloat(x);
         buffer.writeFloat(y);
         buffer.writeFloat(z);
+        buffer.writeEnum(direction);
         buffer.writeEnum(pingType);
         buffer.writeString(pingTarget);
     }

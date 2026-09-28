@@ -1,5 +1,6 @@
 package com.wynntils.hades.protocol.packets.server;
 
+import com.wynntils.hades.protocol.enums.Direction;
 import com.wynntils.hades.protocol.enums.PlayerPingType;
 import com.wynntils.hades.protocol.interfaces.HadesPacket;
 import com.wynntils.hades.protocol.interfaces.adapters.IHadesClientAdapter;
@@ -8,16 +9,18 @@ import com.wynntils.hades.utils.HadesBuffer;
 public class HSPacketPlayerPing implements HadesPacket<IHadesClientAdapter> {
     String username;
     float x, y, z;
+    Direction direction;
     PlayerPingType pingType;
     String pingTarget;
 
     public HSPacketPlayerPing() { }
 
-    public HSPacketPlayerPing(String username, float x, float y, float z, PlayerPingType pingType, String pingTarget) {
+    public HSPacketPlayerPing(String username, float x, float y, float z, Direction direction, PlayerPingType pingType, String pingTarget) {
         this.username = username;
         this.x = x;
         this.y = y;
         this.z = z;
+        this.direction = direction;
         this.pingType = pingType;
         this.pingTarget = pingTarget;
     }
@@ -38,6 +41,10 @@ public class HSPacketPlayerPing implements HadesPacket<IHadesClientAdapter> {
         return z;
     }
 
+    public Direction getDirection() {
+        return direction;
+    }
+
     public PlayerPingType getPingType() {
         return pingType;
     }
@@ -52,6 +59,7 @@ public class HSPacketPlayerPing implements HadesPacket<IHadesClientAdapter> {
         x = buffer.readFloat();
         y = buffer.readFloat();
         z = buffer.readFloat();
+        direction = buffer.readEnum(Direction.class);
         pingType = buffer.readEnum(PlayerPingType.class);
         pingTarget = buffer.readString();
     }
@@ -62,6 +70,7 @@ public class HSPacketPlayerPing implements HadesPacket<IHadesClientAdapter> {
         buffer.writeFloat(x);
         buffer.writeFloat(y);
         buffer.writeFloat(z);
+        buffer.writeEnum(direction);
         buffer.writeEnum(pingType);
         buffer.writeString(pingTarget);
     }
