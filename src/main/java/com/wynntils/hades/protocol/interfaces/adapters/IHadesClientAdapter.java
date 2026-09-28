@@ -49,4 +49,11 @@ public interface IHadesClientAdapter extends IHadesAdapter {
      * @param packet the packet itself
      */
     void handlePing(HSPacketPong packet);
+
+    /**
+     * Handles player ping packets
+     *
+     * @param packet the packet itself
+     */
+    void handlePlayerPing(HSPacketPlayerPing packet);
 }
