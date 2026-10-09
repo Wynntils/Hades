@@ -19,6 +19,7 @@ public enum PacketRegistry {
             registerPacket(HSPacketDiscordLobbyServer.class);
             registerPacket(HSPacketClearMutual.class);
             registerPacket(HSPacketPong.class);
+            registerPacket(HSPacketPlayerPing.class);
         }
     },
 
@@ -35,6 +36,7 @@ public enum PacketRegistry {
             registerPacket(HCPacketUpdateWorld.class);
             registerPacket(HCPacketPing.class);
             registerPacket(HCPacketGearUpdate.class);
+            registerPacket(HCPacketPlayerPing.class);
         }
     };
 
